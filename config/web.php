@@ -52,9 +52,6 @@ $config = [
             ],
         ],
     ],
-    'modules' => [
-        'auth' => require(__DIR__ . '/auth.php'),
-    ],
     'params' => $params,
 ];
 
