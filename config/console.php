@@ -10,8 +10,19 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'gii'],
     'controllerNamespace' => 'app\commands',
+    'controllerMap' => [
+        'migrate'=>[
+            'class'=>'app\commands\MigrateController',
+            'migrationLookup'=>[
+                //Default migration dir automatic check
+                '@app/modules/auth/migrations',
+                // add other migration path here
+            ]
+        ]
+    ],
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'auth' => require(__DIR__ . '/auth.php'),
     ],
     'components' => [
         'cache' => [

@@ -39,6 +39,9 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
+    'modules' => [
+        'auth' => require(__DIR__ . '/auth.php'),
+    ],
     'params' => $params,
 ];
 
