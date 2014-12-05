@@ -28,4 +28,6 @@ return [
     'Delete' => 'Удалено',
     'News successfully added' => 'Новость успешно добавлена',
     'Your news sent for moderation' => 'Ваша новость отправлена на модерацию',
+    'Add news' => 'Добавить новость',
+    'News' => 'Новости',
 ];

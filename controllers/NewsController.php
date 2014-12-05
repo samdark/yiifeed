@@ -5,11 +5,35 @@ namespace app\controllers;
 use app\models\News;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 
 class NewsController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                //'only' => [], //only be applied to
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','add'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
+
         $dataProvider = new ActiveDataProvider([
             'query' => News::find()->where(['status'=>News::STATUS_PUBLIC])->orderBy('id DESC'),
             'pagination' => array('pageSize' => 10),
