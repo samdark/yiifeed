@@ -18,12 +18,12 @@ class NewsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index','rss'],
                         'roles' => ['?'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','add'],
+                        'actions' => ['index','add','rss'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -59,6 +59,16 @@ class NewsController extends Controller
 
         return $this->render('add', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionRss()
+    {
+        header('Content-type: application/xml');
+        $News = News::find()->where(['status'=>News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
+
+        return  $this->renderPartial('listrss', [
+            'news'=>$News
         ]);
     }
 
