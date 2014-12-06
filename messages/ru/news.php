@@ -30,4 +30,5 @@ return [
     'Your news sent for moderation' => 'Ваша новость отправлена на модерацию',
     'Add news' => 'Добавить новость',
     'News' => 'Новости',
+    'Are you sure you want to delete this item?' => 'Удалить новость?',
 ];

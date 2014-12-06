@@ -45,6 +45,8 @@ class News extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios['user_insert'] = ['title', 'text','link'];
+        $scenarios['insert'] = ['title', 'text','link','status'];
+        $scenarios['update'] = ['title', 'text','link','status'];
         //$scenarios['register'] = ['username', 'email', 'password'];
         return $scenarios;
     }
@@ -56,10 +58,10 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'text'], 'required'],
+            [['title', 'text', 'status'], 'required'],
             [['text'], 'string'],
             [['status'], 'integer'],
-            [['created_at'], 'safe'],
+          //  [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 50],
             [['link'], 'string', 'max' => 200],
             [['link'], 'url','skipOnEmpty' => true],
@@ -81,6 +83,14 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getStatus($id = null)
+    {
+       if(!intval($id)) return FALSE;
+       $Statuses = $this->getStatusesArray();
+       if(array_key_exists($id,$Statuses)) return $Statuses[$id];
+       else return FALSE;
+    }
+
     public static function getStatusesArray()
     {
         return [
@@ -95,10 +105,12 @@ class News extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
 
             //@todo After create auth module Change statuses
+            if($this->getScenario() == 'user_insert'){
             // If user is logged in as admin
             $this->status = News::STATUS_PUBLIC;
             //If user is logged
             // $insert->status = News::STATUS_DRAFT;
+            }
 
            // $this->created_at = date('Y-m-d H:i:s');
             return true;
