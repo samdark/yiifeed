@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Alert;
+use ijackua\lepture\Markdowneditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
@@ -21,7 +22,14 @@ use yii\bootstrap\Alert;
     <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'title') ?>
-        <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
+        <?/*= $form->field($model, 'text')->textArea(['rows' => 6]) */?>
+    <?php
+        echo Markdowneditor::widget(
+        [
+            'model' => $model,
+            'attribute' => 'text',
+        ])
+    ?>
         <?= $form->field($model, 'link') ?>
     
         <div class="form-group">

@@ -2,6 +2,7 @@
 
 use yii\grid\GridView;
 use yii\bootstrap\Button;
+use yii\helpers\Markdown;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $this yii\web\View */
@@ -17,9 +18,14 @@ if(!\Yii::$app->user->isGuest)
     'columns' => [
 //        'id',
         'title',
-        'text:ntext',
+//        'text:ntext',
+        ['attribute' => 'text','format'=>'html', 'value'=>function ($model) {
+                return Markdown::process($model->text);
+            }],
         'link',
 //        'status',
-         'created_at',
+        ['attribute' => 'created_at','format'=>'text', 'value'=>function ($model) {
+                return date('Y-m-d H:i:s',$model->created_at);
+            }],
     ],
 ]); ?>
