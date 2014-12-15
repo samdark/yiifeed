@@ -30,7 +30,7 @@ class News extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'news';
+        return '{{%news}}';
     }
 
      public function behaviors()
