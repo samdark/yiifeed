@@ -72,8 +72,8 @@ class NewsController extends Controller
         header('Content-type: application/xml');
         $news = News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
 
-        return $this->renderPartial('listrss', [
-            'news'=>$news
+        return $this->renderPartial('rss', [
+            'news' => $news
         ]);
     }
 
