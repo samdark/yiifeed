@@ -52,6 +52,16 @@ $config = [
                 ],
             ],
         ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'github' => [
+                    'class' => 'yii\authclient\clients\GitHub',
+                    'clientId' => 'ed5ea2bbe3cb95a04721',
+                    'clientSecret' => 'aabd88922130c2d38b9605f7c8bc943a683c9359',
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
