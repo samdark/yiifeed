@@ -9,13 +9,10 @@ use ijackua\lepture\Markdowneditor;
 ?>
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => 50]) ?>
-    <?php
-    echo Markdowneditor::widget(
-        [
-            'model' => $model,
-            'attribute' => 'text',
-        ])
-    ?>
+    <?= Markdowneditor::widget([
+        'model' => $model,
+        'attribute' => 'text',
+    ]) ?>
 
     <?= $form->field($model, 'link')->textInput(['maxlength' => 255]) ?>
     <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatusesArray()) ?>

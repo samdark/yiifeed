@@ -9,7 +9,7 @@ use ijackua\lepture\Markdowneditor;
 /* @var $model app\models\News */
 /* @var $form ActiveForm */
 ?>
-<?php if (Yii::$app->session->hasFlash('news.news_successfully_added')){
+<?php if (Yii::$app->session->hasFlash('news.news_successfully_added')) {
     echo Alert::widget([
         'options' => [
             'class' => 'alert-success',
@@ -19,22 +19,18 @@ use ijackua\lepture\Markdowneditor;
 }?>
 <div class="news-add">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin() ?>
 
         <?= $form->field($model, 'title') ?>
-        <?/*= $form->field($model, 'text')->textArea(['rows' => 6]) */?>
-    <?php
-        echo Markdowneditor::widget(
-        [
+        <?= Markdowneditor::widget([
             'model' => $model,
             'attribute' => 'text',
-        ])
-    ?>
+        ]) ?>
         <?= $form->field($model, 'link') ?>
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end() ?>
 
 </div>
