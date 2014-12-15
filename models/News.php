@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -22,6 +21,8 @@ class News extends \yii\db\ActiveRecord
     const STATUS_PUBLIC = 2;
     const STATUS_DELETE = 3;
 
+    const SCENARIO_SUGGEST = 'suggest';
+
     /**
      * @inheritdoc
      */
@@ -36,7 +37,7 @@ class News extends \yii\db\ActiveRecord
              [
                  'class' => TimestampBehavior::className(),
                  //'createdAtAttribute' => 'create_time',
-                 'updatedAtAttribute' => FALSE,
+                 'updatedAtAttribute' => false,
              ],
          ];
      }
@@ -44,7 +45,7 @@ class News extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['user_insert'] = ['title', 'text','link'];
+        $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text','link'];
         $scenarios['insert'] = ['title', 'text','link','status'];
         $scenarios['update'] = ['title', 'text','link','status'];
         //$scenarios['register'] = ['username', 'email', 'password'];
@@ -60,6 +61,7 @@ class News extends \yii\db\ActiveRecord
         return [
             [['title', 'text', 'status'], 'required'],
             [['text'], 'string'],
+            [['status'], 'default', 'value' => self::STATUS_DRAFT],
             [['status'], 'integer'],
           //  [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 50],
@@ -99,25 +101,4 @@ class News extends \yii\db\ActiveRecord
             self::STATUS_DELETE => Yii::t('news', 'Delete'),
         ];
     }
-
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-
-            //@todo After create auth module Change statuses
-            if($this->getScenario() == 'user_insert'){
-            // If user is logged in as admin
-            $this->status = News::STATUS_PUBLIC;
-            //If user is logged
-            // $insert->status = News::STATUS_DRAFT;
-            }
-
-           // $this->created_at = date('Y-m-d H:i:s');
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
 }

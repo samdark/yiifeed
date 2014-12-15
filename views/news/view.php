@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'link',
             //'status',
             ['label'=>'status','value'=>$model->getStatus($model->status)],
-            ['label'=>'created_at','value'=>date('Y-m-d H:i:s',Html::encode($model->created_at))],
+            ['label'=>'created_at','value'=>Yii::$app->formatter->asDate($model->created_at)],
 
         ],
     ]) ?>

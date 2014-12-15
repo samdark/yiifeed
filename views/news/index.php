@@ -9,7 +9,7 @@ $this->title = Yii::t('news','News');
 ?>
 <?php
 if(!\Yii::$app->user->isGuest)
-    echo yii\helpers\Html::a(Yii::t('news','Add news'),['news/add'],['class' => 'btn btn-success']);
+    echo yii\helpers\Html::a(Yii::t('news','Suggest news'),['news/suggest'],['class' => 'btn btn-success']);
 ?>
 
 
