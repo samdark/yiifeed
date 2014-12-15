@@ -15,7 +15,7 @@ use ijackua\lepture\Markdowneditor;
     ]) ?>
 
     <?= $form->field($model, 'link')->textInput(['maxlength' => 255]) ?>
-    <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatusesArray()) ?>
+    <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('news', 'Create') : Yii::t('news', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

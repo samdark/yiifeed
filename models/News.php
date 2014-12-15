@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "news".
@@ -15,7 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property string $created_at
  */
-class News extends \yii\db\ActiveRecord
+class News extends ActiveRecord
 {
     const STATUS_DRAFT = 1;
     const STATUS_PUBLIC = 2;
@@ -45,10 +47,9 @@ class News extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text','link'];
-        $scenarios['insert'] = ['title', 'text','link','status'];
-        $scenarios['update'] = ['title', 'text','link','status'];
-        //$scenarios['register'] = ['username', 'email', 'password'];
+        $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text', 'link'];
+        $scenarios['insert'] = ['title', 'text', 'link', 'status'];
+        $scenarios['update'] = ['title', 'text', 'link', 'status'];
         return $scenarios;
     }
 
@@ -63,10 +64,9 @@ class News extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['status'], 'default', 'value' => self::STATUS_DRAFT],
             [['status'], 'integer'],
-          //  [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 50],
             [['link'], 'string', 'max' => 200],
-            [['link'], 'url','skipOnEmpty' => true],
+            [['link'], 'url', 'skipOnEmpty' => true],
         ];
     }
 
@@ -85,15 +85,13 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getStatus($id = null)
+    public function getStatusLabel()
     {
-       if(!intval($id)) return FALSE;
-       $Statuses = $this->getStatusesArray();
-       if(array_key_exists($id,$Statuses)) return $Statuses[$id];
-       else return FALSE;
+        $statuses = $this->getStatuses();
+        return ArrayHelper::getValue($statuses, $this->status);
     }
 
-    public static function getStatusesArray()
+    public static function getStatuses()
     {
         return [
             self::STATUS_DRAFT => Yii::t('news', 'Draft'),
