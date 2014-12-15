@@ -35,8 +35,7 @@ AppAsset::register($this);
             ]);
 
             $menuItems = [
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'RSS', 'url' => ['/news/rss']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -67,7 +66,11 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; yiifeed <?= date('Y') ?></p>
+            <p class="pull-left">
+                &copy; YiiFeed <?= date('Y') ?> |
+                <?= Html::a('About', ['/site/about']) ?> |
+                <?= Html::a('Contact', ['/site/contact']) ?>
+            </p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
