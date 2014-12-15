@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
   //  'language' => 'ru-RU',
+    'defaultRoute' => 'news/index',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
