@@ -20,12 +20,12 @@ class NewsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','rss'],
+                        'actions' => ['index', 'rss'],
                         'roles' => ['?'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','add','rss','admin','create','update','delete','view'],
+                        'actions' => ['index', 'suggest', 'rss', 'admin', 'create', 'update', 'delete', 'view'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -41,27 +41,24 @@ class NewsController extends Controller
 
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => News::find()->where(['status'=>News::STATUS_PUBLIC])->orderBy('id DESC'),
-            'pagination' => array('pageSize' => 10),
+            'pagination' => ['pageSize' => 10],
         ]);
 
-        return $this->render('index',[
+        return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionAdd()
+    public function actionSuggest()
     {
-        $model = new News(['scenario'=>'user_insert']);
+        $model = new News(['scenario' => News::SCENARIO_SUGGEST]);
 
-        if ($model->load(\Yii::$app->request->post())) {
-            if ($model->validate()) {
-                $model->save();
-                \Yii::$app->session->setFlash('news.news_successfully_added');
-                $this->redirect(['add']);
-                return true;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                Yii::$app->session->setFlash('news.news_successfully_added');
+                return $this->redirect(['add']);
             }
         }
 
@@ -73,19 +70,18 @@ class NewsController extends Controller
     public function actionRss()
     {
         header('Content-type: application/xml');
-        $News = News::find()->where(['status'=>News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
+        $news = News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
 
-        return  $this->renderPartial('listrss', [
-            'news'=>$News
+        return $this->renderPartial('rss', [
+            'news' => $news
         ]);
     }
 
     public function actionAdmin()
     {
-
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->where(['status'=>News::STATUS_PUBLIC])->orderBy('id DESC'),
-            'pagination' => array('pageSize' => 10),
+            'query' => News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC'),
+            'pagination' => ['pageSize' => 10],
         ]);
 
         return $this->render('admin',[

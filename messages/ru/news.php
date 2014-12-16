@@ -28,7 +28,7 @@ return [
     'Delete' => 'Удалено',
     'News successfully added' => 'Новость успешно добавлена',
     'Your news sent for moderation' => 'Ваша новость отправлена на модерацию',
-    'Add news' => 'Добавить новость',
+    'Suggest news' => 'Предложить новость',
     'News' => 'Новости',
     'Are you sure you want to delete this item?' => 'Удалить новость?',
 ];

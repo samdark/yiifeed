@@ -3,8 +3,9 @@
 namespace app\models;
 
 use Yii;
-use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "news".
@@ -16,18 +17,20 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property string $created_at
  */
-class News extends \yii\db\ActiveRecord
+class News extends ActiveRecord
 {
     const STATUS_DRAFT = 1;
     const STATUS_PUBLIC = 2;
     const STATUS_DELETE = 3;
+
+    const SCENARIO_SUGGEST = 'suggest';
 
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'news';
+        return '{{%news}}';
     }
 
      public function behaviors()
@@ -36,7 +39,7 @@ class News extends \yii\db\ActiveRecord
              [
                  'class' => TimestampBehavior::className(),
                  //'createdAtAttribute' => 'create_time',
-                 'updatedAtAttribute' => FALSE,
+                 'updatedAtAttribute' => false,
              ],
          ];
      }
@@ -44,10 +47,9 @@ class News extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['user_insert'] = ['title', 'text','link'];
-        $scenarios['insert'] = ['title', 'text','link','status'];
-        $scenarios['update'] = ['title', 'text','link','status'];
-        //$scenarios['register'] = ['username', 'email', 'password'];
+        $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text', 'link'];
+        $scenarios['insert'] = ['title', 'text', 'link', 'status'];
+        $scenarios['update'] = ['title', 'text', 'link', 'status'];
         return $scenarios;
     }
 
@@ -60,11 +62,11 @@ class News extends \yii\db\ActiveRecord
         return [
             [['title', 'text', 'status'], 'required'],
             [['text'], 'string'],
+            [['status'], 'default', 'value' => self::STATUS_DRAFT],
             [['status'], 'integer'],
-          //  [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 50],
             [['link'], 'string', 'max' => 200],
-            [['link'], 'url','skipOnEmpty' => true],
+            [['link'], 'url', 'skipOnEmpty' => true],
         ];
     }
 
@@ -83,15 +85,13 @@ class News extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getStatus($id = null)
+    public function getStatusLabel()
     {
-       if(!intval($id)) return FALSE;
-       $Statuses = $this->getStatusesArray();
-       if(array_key_exists($id,$Statuses)) return $Statuses[$id];
-       else return FALSE;
+        $statuses = $this->getStatuses();
+        return ArrayHelper::getValue($statuses, $this->status);
     }
 
-    public static function getStatusesArray()
+    public static function getStatuses()
     {
         return [
             self::STATUS_DRAFT => Yii::t('news', 'Draft'),
@@ -99,25 +99,4 @@ class News extends \yii\db\ActiveRecord
             self::STATUS_DELETE => Yii::t('news', 'Delete'),
         ];
     }
-
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-
-            //@todo After create auth module Change statuses
-            if($this->getScenario() == 'user_insert'){
-            // If user is logged in as admin
-            $this->status = News::STATUS_PUBLIC;
-            //If user is logged
-            // $insert->status = News::STATUS_DRAFT;
-            }
-
-           // $this->created_at = date('Y-m-d H:i:s');
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
 }
