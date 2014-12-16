@@ -15,6 +15,9 @@ return [
         'auth' => require(__DIR__ . '/auth.php'),
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
