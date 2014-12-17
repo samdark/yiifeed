@@ -1,11 +1,12 @@
 <?php
+namespace app\commands;
 
-use yii\db\Schema;
-use yii\db\Migration;
+use Yii;
+use yii\console\Controller;
 
-class m141215_124630_create_roles extends Migration
+class RbacController extends Controller
 {
-    public function up()
+    public function actionInit()
     {
         $auth = Yii::$app->authManager;
 
@@ -53,12 +54,5 @@ class m141215_124630_create_roles extends Migration
         $auth->add($admin);
         $auth->addChild($admin, $updateNews);
         $auth->addChild($admin, $moderator);
-
-    }
-
-    public function down()
-    {
-        $auth = Yii::$app->authManager;
-        $auth->removeAll();
     }
 }
