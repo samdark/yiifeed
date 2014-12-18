@@ -41,6 +41,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
+                $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin'], 'visible'=>(\Yii::$app->user->can('moderator')||\Yii::$app->user->can('admin'))?true:false];
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],

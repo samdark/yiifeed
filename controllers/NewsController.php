@@ -25,9 +25,15 @@ class NewsController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'suggest', 'rss', 'admin', 'create', 'update', 'delete', 'view'],
+                        'actions' => ['index', 'suggest', 'rss'],
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'suggest', 'rss', 'admin', 'create', 'update', 'delete', 'view'],
+                        'roles' => ['moderator','admin'],
+                    ],
+
                 ],
             ],
             'verbs' => [
@@ -58,7 +64,7 @@ class NewsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash('news.news_successfully_added');
-                return $this->redirect(['add']);
+                return $this->redirect(['suggest']);
             }
         }
 
@@ -80,7 +86,7 @@ class NewsController extends Controller
     public function actionAdmin()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC'),
+            'query' => News::find()->orderBy('id DESC'),
             'pagination' => ['pageSize' => 10],
         ]);
 
