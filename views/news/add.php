@@ -20,13 +20,15 @@ use ijackua\lepture\Markdowneditor;
 <div class="news-add">
 
     <?php $form = ActiveForm::begin() ?>
+        <?= $form->field($model, 'link') ?>
 
         <?= $form->field($model, 'title') ?>
+
         <?= Markdowneditor::widget([
             'model' => $model,
             'attribute' => 'text',
         ]) ?>
-        <?= $form->field($model, 'link') ?>
+
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

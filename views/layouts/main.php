@@ -27,7 +27,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'YiiFeed',
+                'brandLabel' => '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> YiiFeed',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
