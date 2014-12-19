@@ -80,7 +80,7 @@ class NewsController extends Controller
     public function actionAdmin()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC'),
+            'query' => News::find()->orderBy('id DESC'),
             'pagination' => ['pageSize' => 10],
         ]);
 
