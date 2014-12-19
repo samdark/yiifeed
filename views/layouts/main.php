@@ -49,6 +49,10 @@ AppAsset::register($this);
                 ];
             }
 
+            if (!\Yii::$app->user->isGuest) {
+                echo yii\helpers\Html::a(Yii::t('news', 'Suggest news'), ['news/suggest'], ['class' => 'btn btn-success navbar-btn']);
+            }
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
