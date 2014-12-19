@@ -7,7 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
+use yii\helpers\ArrayHelper;
 /**
  * User model
  *
@@ -186,4 +186,30 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('user', 'ID'),
+            'username' => Yii::t('user', 'Username'),
+            'email' => Yii::t('user', 'E-mail'),
+            'status' => Yii::t('user', 'Status'),
+            'created_at' => Yii::t('user', 'Created At'),
+        ];
+    }
+
+    public function getStatusLabel()
+    {
+        $statuses = $this->getStatuses();
+        return ArrayHelper::getValue($statuses, $this->status);
+    }
+
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_DELETED => Yii::t('user', 'Delete'),
+            self::STATUS_ACTIVE  => Yii::t('user', 'Active'),
+        ];
+    }
+
 }

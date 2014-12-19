@@ -53,6 +53,14 @@ $config = [
                         'news' => 'news.php',
                     ],
                 ],
+                'user*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'user' => 'user.php',
+                    ],
+                ],
             ],
         ],
         'authClientCollection' => [
