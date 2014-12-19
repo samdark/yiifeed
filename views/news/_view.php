@@ -9,13 +9,13 @@ use yii\helpers\Markdown;
 $isFull = isset($isFull) ? $isFull : false;
 ?>
 <div class="row">
-    <div class="col-xs-2 post-meta">
+    <div class="col-md-2 col-sm-3 post-meta">
         <p class="time">
             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             <?= Yii::$app->formatter->asDate($model->created_at) ?>
         </p>
     </div>
-    <div class="col-xs-10 post">
+    <div class="col-sm-9 col-md-10 post">
         <h1>
             <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
         </h1>

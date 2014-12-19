@@ -102,7 +102,7 @@ a.desc:after {
     margin-bottom: 1em;
 }
 
-.post {
+.post, .page {
     color: #555;
 
     font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
@@ -114,7 +114,7 @@ a.desc:after {
     max-width: 34em;
 }
 
-.post-meta {
+.post-meta, .page-meta {
     font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
     font-size: 120%;
 
@@ -122,4 +122,8 @@ a.desc:after {
     margin-bottom: 10px;
 
     color: #ccc;
+}
+
+.page-meta .icon {
+    font-size: 800%;
 }
