@@ -65,13 +65,18 @@ $config = [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'rules' => require 'urls.php',
+            'showScriptName' => false,
+        ],
     ],
     'params' => $params,
 ];
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
+    //$config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = 'yii\debug\Module';
 
     $config['bootstrap'][] = 'gii';
