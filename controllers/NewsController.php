@@ -16,24 +16,18 @@ class NewsController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => [], //only be applied to
+                'only' => ['suggest', 'admin', 'create', 'update', 'delete'], //only be applied to
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'rss'],
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'suggest', 'rss'],
+                        'actions' => ['suggest'],
                         'roles' => ['@'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'suggest', 'rss', 'admin', 'create', 'update', 'delete', 'view'],
-                        'roles' => ['moderator','admin'],
+                        'actions' => ['admin', 'create', 'update', 'delete'],
+                        'roles' => ['moderator', 'admin'],
                     ],
-
                 ],
             ],
             'verbs' => [
@@ -64,11 +58,11 @@ class NewsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash('news.news_successfully_added');
-                return $this->redirect(['suggest']);
+                return $this->redirect(['index']);
             }
         }
 
-        return $this->render('add', [
+        return $this->render('suggest', [
             'model' => $model,
         ]);
     }
@@ -86,7 +80,7 @@ class NewsController extends Controller
     public function actionAdmin()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->orderBy('id DESC'),
+            'query' => News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC'),
             'pagination' => ['pageSize' => 10],
         ]);
 
