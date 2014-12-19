@@ -5,6 +5,8 @@
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Markdown;
+
+$isFull = isset($isFull) ? $isFull : false;
 ?>
 <div class="row">
     <div class="col-xs-2 post-meta">
@@ -19,12 +21,17 @@ use yii\helpers\Markdown;
         </h1>
 
         <div class="content">
-            <?= StringHelper::truncateWords(Markdown::process($model->text), 70) ?>
-        </div>
+            <?php
+            $text = Markdown::process($model->text);
+            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a('Read more', ['view', 'id' => $model->id]) . '</p>', true);
+            ?>
 
-        <div class="meta">
-            <?php if (!empty($model->link)): ?>
-                <p><?= Html::a(Html::encode($model->link), $model->link) ?></p>
+            <?php if ($isFull): ?>
+            <div class="meta">
+                <?php if (!empty($model->link)): ?>
+                    <p><?= Html::a(Html::encode($model->link), $model->link) ?></p>
+                <?php endif ?>
+            </div>
             <?php endif ?>
         </div>
     </div>
