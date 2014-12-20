@@ -9,14 +9,7 @@ use ijackua\lepture\Markdowneditor;
 /* @var $model app\models\News */
 /* @var $form ActiveForm */
 ?>
-<?php if (Yii::$app->session->hasFlash('news.news_successfully_added')) {
-    echo Alert::widget([
-        'options' => [
-            'class' => 'alert-success',
-        ],
-        'body' => Yii::t('news','Your news sent for moderation'),
-    ]);
-}?>
+
 <div class="news-add">
 
     <?php $form = ActiveForm::begin() ?>
