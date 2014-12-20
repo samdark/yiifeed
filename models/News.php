@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "news".
@@ -40,6 +41,11 @@ class News extends ActiveRecord
                  'class' => TimestampBehavior::className(),
                  //'createdAtAttribute' => 'create_time',
                  'updatedAtAttribute' => false,
+             ],
+             [
+                 'class' => BlameableBehavior::className(),
+                 'createdByAttribute' => 'user_id',
+                 'updatedByAttribute' => false,
              ],
          ];
      }
