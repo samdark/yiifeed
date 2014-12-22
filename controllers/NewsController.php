@@ -78,14 +78,21 @@ class NewsController extends Controller
         ]);
     }
 
-    public function actionAdmin()
+    public function actionAdmin($status = null)
     {
+        $query = News::find()->orderBy('id DESC');
+
+        if ($status !== null) {
+            $query->andWhere(['status' => $status]);
+        }
+
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->orderBy('id DESC'),
+            'query' => $query,
             'pagination' => ['pageSize' => 10],
         ]);
 
         return $this->render('admin',[
+            'status' => $status,
             'dataProvider' => $dataProvider,
         ]);
     }

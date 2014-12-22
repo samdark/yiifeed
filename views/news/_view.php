@@ -8,6 +8,7 @@ use yii\helpers\Markdown;
 
 $isFull = isset($isFull) ? $isFull : false;
 $displayStatus = isset($displayStatus) ? $displayStatus : false;
+$displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorButtons : false;
 ?>
 <div class="row">
     <div class="col-md-2 col-sm-3 post-meta">
@@ -18,6 +19,17 @@ $displayStatus = isset($displayStatus) ? $displayStatus : false;
 
         <?php if ($displayStatus): ?>
         <p><?= Yii::t('news', 'Status') .": ". $model->getStatusLabel() ?></p>
+        <?php endif ?>
+
+        <?php if ($displayModeratorButtons): ?>
+            <?= Html::a(Yii::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(Yii::t('news', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('news', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
         <?php endif ?>
     </div>
     <div class="col-sm-9 col-md-10 post">

@@ -1,21 +1,45 @@
 <?php
-use yii\grid\GridView;
-use yii\helpers\Markdown;
-echo GridView::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-        'id',
-        'title',
-//        'text:ntext',
-        ['attribute' => 'text','format'=>'html', 'value'=>function ($model) {
-                return Markdown::process($model->text);
-            }],
-        'link',
-//        'status',
-        ['attribute' => 'created_at','format'=>'text', 'value'=>function ($model) {
-                return date('Y-m-d H:i:s',$model->created_at);
-            }],
-        ['class' => 'yii\grid\ActionColumn'],
-    ],
-]); ?>
+use app\models\News;
+use \yii\widgets\ListView;
+use yii\bootstrap\Alert;
+
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $this yii\web\View */
+$this->title = Yii::t('news', 'News admin');
+?>
+<div class="row news-index">
+    <div class="col-xs-12">
+        <?= \yii\bootstrap\Nav::widget([
+            'options' => ['class' => 'nav-pills'],
+            'items' => [
+            [
+                'label' => 'Drafts',
+                'url' => ['news/admin', 'status' => News::STATUS_DRAFT],
+                'active' => $status == News::STATUS_DRAFT,
+            ],
+            [
+                'label' => 'Deleted',
+                'url' => ['news/admin', 'status' => News::STATUS_DELETED],
+                'active' => $status == News::STATUS_DELETED,
+            ],
+            [
+                'label' => 'Published',
+                'url' => ['news/admin', 'status' => News::STATUS_PUBLIC],
+                'active' => $status == News::STATUS_PUBLIC,
+            ],
+          ],
+        ]) ?>
+
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'layout' => '{items}{pager}',
+            'itemOptions' => ['class' => 'item'],
+            'itemView' => '_view',
+            'viewParams' => [
+                'displayStatus' => true,
+                'displayModeratorButtons' => true,
+            ],
+        ]) ?>
+    </div>
+
+</div>
