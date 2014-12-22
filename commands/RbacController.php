@@ -1,7 +1,9 @@
 <?php
 namespace app\commands;
 
+use app\models\User;
 use Yii;
+use yii\base\InvalidParamException;
 use yii\console\Controller;
 
 class RbacController extends Controller
@@ -54,5 +56,21 @@ class RbacController extends Controller
         $auth->add($admin);
         $auth->addChild($admin, $updateNews);
         $auth->addChild($admin, $moderator);
+    }
+
+    public function actionAssign($role, $userId)
+    {
+        $user = User::findOne($userId);
+        if (!$user) {
+            throw new InvalidParamException('There is no such user.');
+        }
+
+        $auth = Yii::$app->authManager;
+        $role = $auth->getRole($role);
+        if (!$role) {
+            throw new InvalidParamException('There is no such role.');
+        }
+
+        $auth->assign($role, $userId);
     }
 }
