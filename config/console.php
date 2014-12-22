@@ -12,7 +12,6 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
-        'auth' => require(__DIR__ . '/auth.php'),
     ],
     'components' => [
         'authManager' => [
