@@ -22,7 +22,7 @@ class News extends ActiveRecord
 {
     const STATUS_DRAFT = 1;
     const STATUS_PUBLIC = 2;
-    const STATUS_DELETE = 3;
+    const STATUS_DELETED = 3;
 
     const SCENARIO_SUGGEST = 'suggest';
 
@@ -102,7 +102,7 @@ class News extends ActiveRecord
         return [
             self::STATUS_DRAFT => Yii::t('news', 'Draft'),
             self::STATUS_PUBLIC => Yii::t('news', 'Public'),
-            self::STATUS_DELETE => Yii::t('news', 'Delete'),
+            self::STATUS_DELETED => Yii::t('news', 'Deleted'),
         ];
     }
 }

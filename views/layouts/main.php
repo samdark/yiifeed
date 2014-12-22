@@ -42,9 +42,9 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
                 $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin'], 'visible'=>(\Yii::$app->user->can('moderator')||\Yii::$app->user->can('admin'))?true:false];
-                $menuItems[] = ['label' => 'My news', 'url' => ['/user/news']];
+                $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/user/view', 'id' => \Yii::$app->user->id]];
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Logout',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];

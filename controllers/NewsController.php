@@ -53,13 +53,14 @@ class NewsController extends Controller
 
     public function actionSuggest()
     {
-        $model = new News(['scenario' => News::SCENARIO_SUGGEST]);
+        $model = new News([
+            'status' => News::STATUS_DRAFT,
+            'scenario' => News::SCENARIO_SUGGEST
+        ]);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                Yii::$app->session->setFlash('news.news_successfully_added');
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('news.news_successfully_added');
+            return $this->redirect(['index']);
         }
 
         return $this->render('suggest', [

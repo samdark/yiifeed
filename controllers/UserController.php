@@ -23,12 +23,12 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['news'],
+                        'actions' => ['view'],
                         'roles' => ['@'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create', 'update', 'delete','view'],
+                        'actions' => ['index', 'create', 'update', 'delete'],
                         'roles' => ['admin'],
                     ],
                 ],
@@ -40,18 +40,6 @@ class UserController extends Controller
                 ],
             ],
         ];
-    }
-
-    public function actionNews()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->where(['user_id'=>Yii::$app->user->id])->orderBy('id DESC'),
-            'pagination' => ['pageSize' => 10],
-        ]);
-
-        return $this->render('news', [
-            'dataProvider' => $dataProvider,
-        ]);
     }
 
     /**
@@ -70,14 +58,26 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays user profile
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
+        $user = User::findOne($id);
+        if (!$user) {
+            throw new NotFoundHttpException("No such user.");
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => News::find()->where(['user_id'=>$id])->orderBy('id DESC'),
+            'pagination' => ['pageSize' => 10],
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $user,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

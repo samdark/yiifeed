@@ -1,6 +1,7 @@
 <?php
 return [
     'news' => 'news/view',
+    'user' => 'user/view',
 
     'about' => 'site/about',
     'logout' => 'site/logout',

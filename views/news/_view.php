@@ -7,6 +7,7 @@ use yii\helpers\StringHelper;
 use yii\helpers\Markdown;
 
 $isFull = isset($isFull) ? $isFull : false;
+$displayStatus = isset($displayStatus) ? $displayStatus : false;
 ?>
 <div class="row">
     <div class="col-md-2 col-sm-3 post-meta">
@@ -14,6 +15,10 @@ $isFull = isset($isFull) ? $isFull : false;
             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             <?= Yii::$app->formatter->asDate($model->created_at) ?>
         </p>
+
+        <?php if ($displayStatus): ?>
+        <p><?= Yii::t('news', 'Status') .": ". $model->getStatusLabel() ?></p>
+        <?php endif ?>
     </div>
     <div class="col-sm-9 col-md-10 post">
         <h1>
