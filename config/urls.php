@@ -6,4 +6,5 @@ return [
     'logout' => 'site/logout',
     'login' => 'site/login',
     'signup' => 'site/signup',
+    'auth' => 'site/auth',
 ];
