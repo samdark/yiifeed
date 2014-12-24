@@ -27,8 +27,9 @@ phpunit.phar
 /phpunit.xml
 
 # local configs
+/config/key.php
 /config/db.php
 /config/authclients.php
 
-# rbac assignments
+# rbac items
 /rbac
