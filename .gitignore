@@ -25,7 +25,10 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+
+# local configs
 /config/db.php
+/config/authclients.php
 
 # rbac assignments
 /rbac/assignments.php
