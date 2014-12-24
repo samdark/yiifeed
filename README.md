@@ -43,6 +43,34 @@ composer install
 ~~~
 
 
-### 2. Database
+### 2. Configs
 
-Create a database. Then copy the file `config/db.php-orig` to `config/db.php` then adjust it to use your database.
+There are more `.php-orig` sample configs in `config` directory. Copy these to `.php` without `-orig` and adjust to your
+needs.
+
+### 3. Database
+
+Create a database. By this moment you should have `config/db.php`. Specify your database connection there.
+
+Then apply migrations by running:
+
+```
+yii migrate
+```
+
+### 4. Permissions 
+
+Initilize permissions tree by running:
+
+```
+yii rbac/init 
+```
+
+You can use `rbac/assign` to assign roles to users:
+
+```
+yii rbac/assign admin 3
+yii rbac/assign moderator 5
+```
+
+Will assign admin role to user with id=3 and moderator role to user with id=5.
