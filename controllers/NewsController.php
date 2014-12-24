@@ -26,7 +26,7 @@ class NewsController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['admin', 'create', 'update', 'delete'],
-                        'roles' => ['moderator', 'admin'],
+                        'roles' => ['adminUsers'],
                     ],
                 ],
             ],
@@ -95,19 +95,6 @@ class NewsController extends Controller
             'status' => $status,
             'dataProvider' => $dataProvider,
         ]);
-    }
-
-    public function actionCreate()
-    {
-        $model = new News();
-        $model->scenario = 'insert';
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
     }
 
     public function actionUpdate($id)

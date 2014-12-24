@@ -25,6 +25,7 @@ class News extends ActiveRecord
     const STATUS_DELETED = 3;
 
     const SCENARIO_SUGGEST = 'suggest';
+    const SCENARIO_UPDATE = 'update';
 
     /**
      * @inheritdoc
@@ -54,8 +55,7 @@ class News extends ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text', 'link'];
-        $scenarios['insert'] = ['title', 'text', 'link', 'status'];
-        $scenarios['update'] = ['title', 'text', 'link', 'status'];
+        $scenarios[self::SCENARIO_UPDATE] = ['title', 'text', 'link', 'status'];
         return $scenarios;
     }
 

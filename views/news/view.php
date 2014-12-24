@@ -10,7 +10,7 @@ $this->title = $model->title;
 <div class="row news-view">
 
     <div class="col-xs-12">
-        <?php if(\Yii::$app->user->can('moderator')||\Yii::$app->user->can('admin')){ ?>
+        <?php if(\Yii::$app->user->can('adminNews')): ?>
             <div class="controls">
                 <?= Html::a(Yii::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a(Yii::t('news', 'Delete'), ['delete', 'id' => $model->id], [
@@ -21,10 +21,10 @@ $this->title = $model->title;
                     ],
                 ]) ?>
             </div>
-        <?php } ?>
-            <?= $this->render('_view', [
-                'isFull' => true,
-                'model' => $model,
-            ]) ?>
+        <?php endif ?>
+        <?= $this->render('_view', [
+            'isFull' => true,
+            'model' => $model,
+        ]) ?>
     </div>
 </div>

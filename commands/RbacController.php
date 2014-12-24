@@ -10,52 +10,31 @@ class RbacController extends Controller
 {
     public function actionInit()
     {
+        if (!$this->confirm("Are you sure? It will re-create permissions tree.")) {
+            return self::EXIT_CODE_NORMAL;
+        }
+
         $auth = Yii::$app->authManager;
+        $auth->removeAll();
 
-        $createNews = $auth->createPermission('createNews');
-        $createNews->description = 'Create a news';
-        $auth->add($createNews);
+        $adminNews = $auth->createPermission('adminNews');
+        $adminNews->description = 'Administrate news';
+        $auth->add($adminNews);
 
-        $updateNews = $auth->createPermission('updateNews');
-        $updateNews->description = 'Update news';
-        $auth->add($updateNews);
-
-        $addUserNews = $auth->createPermission('addUserNews');
-        $addUserNews->description = 'User add news';
-        $auth->add($addUserNews);
-
-        $listNews = $auth->createPermission('listNews');
-        $listNews->description = 'Show list news';
-        $auth->add($listNews);
-
-        $deleteNews = $auth->createPermission('deleteNews');
-        $deleteNews->description = 'Delete news';
-        $auth->add($deleteNews);
-
-        $adminListNews = $auth->createPermission('adminListNews');
-        $adminListNews->description = 'Show list news';
-        $auth->add($adminListNews);
-
-        $user = $auth->createRole('user');
-        $user->description = 'Пользователь';
-        $auth->add($user);
-        $auth->addChild($user, $addUserNews);
-        $auth->addChild($user, $listNews);
+        $adminUsers = $auth->createPermission('adminUsers');
+        $adminUsers->description = 'Administrate users';
+        $auth->add($adminUsers);
 
         $moderator = $auth->createRole('moderator');
-        $moderator->description = 'Модератор';
+        $moderator->description = 'Moderator';
         $auth->add($moderator);
-        $auth->addChild($moderator, $createNews);
-        $auth->addChild($moderator, $updateNews);
-        $auth->addChild($moderator, $listNews);
-        $auth->addChild($moderator, $adminListNews);
-        $auth->addChild($moderator, $deleteNews);
+        $auth->addChild($moderator, $adminNews);
 
         $admin = $auth->createRole('admin');
-        $admin->description = 'Администратор';
+        $admin->description = 'Administrator';
         $auth->add($admin);
-        $auth->addChild($admin, $updateNews);
         $auth->addChild($admin, $moderator);
+        $auth->addChild($admin, $adminUsers);
     }
 
     public function actionAssign($role, $userId)

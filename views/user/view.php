@@ -19,7 +19,7 @@ use \yii\widgets\ListView;
             <div class="col-xs-6">
                 <h1><?= Html::encode($this->title) ?></h1>
 
-                <?php if (Yii::$app->user->can('admin')): ?>
+                <?php if (Yii::$app->user->can('adminUsers')): ?>
                 <p>
                     <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                     <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [

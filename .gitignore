@@ -31,4 +31,4 @@ phpunit.phar
 /config/authclients.php
 
 # rbac assignments
-/rbac/assignments.php
+/rbac
