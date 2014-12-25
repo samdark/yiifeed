@@ -94,7 +94,7 @@ class NewsController extends Controller
             $item->title = $post->title;
             $item->link = Url::to(['news/view', 'id' => $post->id], true);
             $item->guid = Url::to(['news/view', 'id' => $post->id], true);
-            $item->description = Html::encode(Markdown::process($post->text));
+            $item->description = Markdown::process($post->text);
             $item->pubDate = $post->created_at;
             $item->setAuthor('noreply@yiifeed.com', 'YiiFeed');
             $feed->addItem($item);
