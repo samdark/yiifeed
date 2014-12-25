@@ -19,12 +19,13 @@ $this->title = 'About YiiFeed';
 
         <h2>Project sources</h2>
 
-        <p>Project will be open sourced at GitHub as soon as we'll polish it a bit more. Stay tuned.</p>
+        <p>Project is <a href="https://github.com/samdark/yiifeed">open sourced at GitHub</a>. You've very welcome to
+        contribute in form of issue reports and pull requests.</p>
 
         <h2>Team</h2>
 
-        <p>Currently we are Alexander Makarov and Cvigun Vadim. As soon as project will be opensourced anyone would
-        be able to join.</p>
+        <p>Initially the project was created by Alexander Makarov and Cvigun Vadim. You can check
+            <a href="https://github.com/samdark/yiifeed/graphs/contributors">all contributors at GitHub</a>.</p>
 
         <h2>Contacts</h2>
 
