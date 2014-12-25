@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Markdown;
+use \yii\helpers\HtmlPurifier;
 
 $isFull = isset($isFull) ? $isFull : false;
 $displayStatus = isset($displayStatus) ? $displayStatus : false;
@@ -39,7 +40,7 @@ $displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorBu
 
         <div class="content">
             <?php
-            $text = Markdown::process($model->text);
+            $text = HtmlPurifier::process(Markdown::process($model->text));
             echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a('Read more', ['view', 'id' => $model->id]) . '</p>', true);
             ?>
 

@@ -6,6 +6,7 @@ use app\components\feed\Item;
 use Yii;
 use app\models\News;
 use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\Markdown;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -94,7 +95,7 @@ class NewsController extends Controller
             $item->title = $post->title;
             $item->link = Url::to(['news/view', 'id' => $post->id], true);
             $item->guid = Url::to(['news/view', 'id' => $post->id], true);
-            $item->description = Markdown::process($post->text);
+            $item->description = HtmlPurifier::process(Markdown::process($post->text));
             $item->pubDate = $post->created_at;
             $item->setAuthor('noreply@yiifeed.com', 'YiiFeed');
             $feed->addItem($item);
