@@ -36,7 +36,8 @@ use \yii\widgets\ListView;
             <div class="col-xs-6">
                 <h2>Connect extra profiles:</h2>
                 <?= yii\authclient\widgets\AuthChoice::widget([
-                    'baseAuthUrl' => ['site/auth']
+                    'baseAuthUrl' => ['site/auth'],
+                    'popupMode' => false,
                 ]) ?>
             </div>
             <?php endif ?>

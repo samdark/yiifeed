@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-xs-3 col-xs-offset-1">
             <?= yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['site/auth']
+                'baseAuthUrl' => ['site/auth'],
+                'popupMode' => false,
             ]) ?>
         </div>
         <div class="col-xs-2">
