@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> - YiiFeed</title>
+    <link rel="alternate" type="application/rss+xml" title="YiiFeed" href="<?= \yii\helpers\Url::to(['news/rss'], true)?>"/>
     <?php $this->head() ?>
 </head>
 <body>
