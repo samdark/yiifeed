@@ -1,8 +1,13 @@
 <?php
 
 namespace app\controllers;
+use app\components\feed\Feed;
+use app\components\feed\Item;
 use Yii;
 use app\models\News;
+use yii\helpers\Html;
+use yii\helpers\Markdown;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -71,11 +76,31 @@ class NewsController extends Controller
     public function actionRss()
     {
         header('Content-type: application/xml');
+
+        /** @var News[] $news */
         $news = News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
 
-        return $this->renderPartial('rss', [
-            'news' => $news
-        ]);
+        $feed = new Feed();
+        $feed->title = 'YiiFeed';
+        $feed->link = Url::to('');
+        $feed->selfLink = Url::to(['news/rss'], true);
+        $feed->description = 'Yii news';
+        $feed->language = 'en';
+        $feed->setWebMaster('sam@rmcreative.ru', 'Alexander Makarov');
+        $feed->setManagingEditor('sam@rmcreative.ru', 'Alexander Makarov');
+
+        foreach ($news as $post) {
+            $item = new Item();
+            $item->title = $post->title;
+            $item->link = Url::to(['news/view', 'id' => $post->id], true);
+            $item->guid = Url::to(['news/view', 'id' => $post->id], true);
+            $item->description = Html::encode(Markdown::process($post->text));
+            $item->pubDate = $post->created_at;
+            $item->setAuthor('noreply@yiifeed.com', 'YiiFeed');
+            $feed->addItem($item);
+        }
+
+        $feed->render();
     }
 
     public function actionAdmin($status = null)
