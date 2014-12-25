@@ -70,8 +70,8 @@ class News extends ActiveRecord
             [['text'], 'string'],
             [['status'], 'default', 'value' => self::STATUS_DRAFT],
             [['status'], 'integer'],
-            [['title'], 'string', 'max' => 50],
-            [['link'], 'string', 'max' => 200],
+            [['title'], 'string', 'max' => 250],
+            [['link'], 'string', 'max' => 250],
             [['link'], 'url', 'skipOnEmpty' => true],
         ];
     }
