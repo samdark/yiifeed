@@ -35,7 +35,7 @@ $displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorBu
     </div>
     <div class="col-sm-9 col-md-10 post">
         <h1>
-            <?= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
+            <?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
         </h1>
 
         <div class="content">
