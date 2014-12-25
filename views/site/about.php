@@ -26,9 +26,5 @@ $this->title = 'About YiiFeed';
 
         <p>Initially the project was created by Alexander Makarov and Cvigun Vadim. You can check
             <a href="https://github.com/samdark/yiifeed/graphs/contributors">all contributors at GitHub</a>.</p>
-
-        <h2>Contacts</h2>
-
-        <p>If you have any questions or ideas... basically anything. Feel free to <a href="mailto:sam+yiifeed@rmcreative.ru">contact Alexander</a>.</p>
     </div>
 </div>
