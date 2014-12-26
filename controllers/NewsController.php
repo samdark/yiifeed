@@ -76,8 +76,6 @@ class NewsController extends Controller
 
     public function actionRss()
     {
-        header('Content-type: application/xml');
-
         /** @var News[] $news */
         $news = News::find()->where(['status' => News::STATUS_PUBLIC])->orderBy('id DESC')->limit(50)->all();
 
