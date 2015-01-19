@@ -3,14 +3,32 @@
  * @var $model app\models\News
  */
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\StringHelper;
 use yii\helpers\Markdown;
 use \yii\helpers\HtmlPurifier;
 
+/* @var yii\web\View $this */
+
 $isFull = isset($isFull) ? $isFull : false;
 $displayStatus = isset($displayStatus) ? $displayStatus : false;
 $displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorButtons : false;
+
+// OpenGraph metatags
+$this->registerMetaTag(['property' => 'og:title', 'content' => Html::encode($model->title)]);
+$this->registerMetaTag(['property' => 'og:site_name', 'content' => 'YiiFeed']);
+$this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
+
 ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&appId=444774969003761&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="row">
     <div class="col-md-2 col-sm-3 post-meta">
         <p class="time">
@@ -49,6 +67,11 @@ $displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorBu
                 <?php if (!empty($model->link)): ?>
                     <p><?= Html::a(Html::encode($model->link), $model->link) ?></p>
                 <?php endif ?>
+
+                <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-hashtags="yii">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                <div class="fb-share-button" data-href="<?= Url::canonical() ?>" data-layout="button"></div>
             </div>
             <?php endif ?>
         </div>

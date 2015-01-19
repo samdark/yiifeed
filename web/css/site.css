@@ -127,3 +127,7 @@ a.desc:after {
 .page-meta .icon {
     font-size: 800%;
 }
+
+.fb-share-button.fb_iframe_widget>span {
+    vertical-align: baseline !important;
+}
