@@ -13,17 +13,17 @@ $this->title = Yii::t('news', 'News admin');
             'options' => ['class' => 'nav-pills'],
             'items' => [
             [
-                'label' => 'Drafts',
+                'label' => News::statusLabel(News::STATUS_PROPOSED),
                 'url' => ['news/admin', 'status' => News::STATUS_PROPOSED],
                 'active' => $status == News::STATUS_PROPOSED,
             ],
             [
-                'label' => 'Deleted',
+                'label' => News::statusLabel(News::STATUS_REJECTED),
                 'url' => ['news/admin', 'status' => News::STATUS_REJECTED],
                 'active' => $status == News::STATUS_REJECTED,
             ],
             [
-                'label' => 'Published',
+                'label' => News::statusLabel(News::STATUS_PUBLISHED),
                 'url' => ['news/admin', 'status' => News::STATUS_PUBLISHED],
                 'active' => $status == News::STATUS_PUBLISHED,
             ],

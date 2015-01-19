@@ -93,8 +93,13 @@ class News extends ActiveRecord
 
     public function getStatusLabel()
     {
-        $statuses = $this->getStatuses();
-        return ArrayHelper::getValue($statuses, $this->status);
+        return static::statusLabel($this->status);
+    }
+
+    public static function statusLabel($status)
+    {
+        $statuses = static::getStatuses();
+        return ArrayHelper::getValue($statuses, $status);
     }
 
     public static function getStatuses()
