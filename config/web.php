@@ -71,6 +71,15 @@ $config = [
             'showScriptName' => false,
         ],
     ],
+    'modules' => [
+        'vote' => [
+            'class' => 'chiliec\vote\Module',
+            'matchingModels' => [
+                'news' => 0,
+            ],
+            'allow_guests' => false,
+        ],
+    ],
     'params' => $params,
 ];
 
