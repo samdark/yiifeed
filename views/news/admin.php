@@ -14,18 +14,18 @@ $this->title = Yii::t('news', 'News admin');
             'items' => [
             [
                 'label' => 'Drafts',
-                'url' => ['news/admin', 'status' => News::STATUS_DRAFT],
-                'active' => $status == News::STATUS_DRAFT,
+                'url' => ['news/admin', 'status' => News::STATUS_PROPOSED],
+                'active' => $status == News::STATUS_PROPOSED,
             ],
             [
                 'label' => 'Deleted',
-                'url' => ['news/admin', 'status' => News::STATUS_DELETED],
-                'active' => $status == News::STATUS_DELETED,
+                'url' => ['news/admin', 'status' => News::STATUS_REJECTED],
+                'active' => $status == News::STATUS_REJECTED,
             ],
             [
                 'label' => 'Published',
-                'url' => ['news/admin', 'status' => News::STATUS_PUBLIC],
-                'active' => $status == News::STATUS_PUBLIC,
+                'url' => ['news/admin', 'status' => News::STATUS_PUBLISHED],
+                'active' => $status == News::STATUS_PUBLISHED,
             ],
           ],
         ]) ?>

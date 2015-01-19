@@ -20,9 +20,9 @@ use yii\behaviors\BlameableBehavior;
  */
 class News extends ActiveRecord
 {
-    const STATUS_DRAFT = 1;
-    const STATUS_PUBLIC = 2;
-    const STATUS_DELETED = 3;
+    const STATUS_PROPOSED = 1;
+    const STATUS_PUBLISHED = 2;
+    const STATUS_REJECTED = 3;
 
     const SCENARIO_SUGGEST = 'suggest';
     const SCENARIO_UPDATE = 'update';
@@ -68,7 +68,7 @@ class News extends ActiveRecord
         return [
             [['title', 'text', 'status'], 'required'],
             [['text'], 'string'],
-            [['status'], 'default', 'value' => self::STATUS_DRAFT],
+            [['status'], 'default', 'value' => self::STATUS_PROPOSED],
             [['status'], 'integer'],
             [['title'], 'string', 'max' => 250],
             [['link'], 'string', 'max' => 250],
@@ -100,9 +100,9 @@ class News extends ActiveRecord
     public static function getStatuses()
     {
         return [
-            self::STATUS_DRAFT => Yii::t('news', 'Draft'),
-            self::STATUS_PUBLIC => Yii::t('news', 'Public'),
-            self::STATUS_DELETED => Yii::t('news', 'Deleted'),
+            self::STATUS_PROPOSED => Yii::t('news', 'Proposed'),
+            self::STATUS_PUBLISHED => Yii::t('news', 'Published'),
+            self::STATUS_REJECTED => Yii::t('news', 'Rejected'),
         ];
     }
 }
