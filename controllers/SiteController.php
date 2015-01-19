@@ -11,6 +11,7 @@ use Yii;
 use yii\authclient\ClientInterface;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -69,6 +70,7 @@ class SiteController extends Controller
     public function onAuthSuccess($client)
     {
         $attributes = $client->getUserAttributes();
+        $email = ArrayHelper::getValue($attributes, 'email');
 
         /** @var Auth $auth */
         $auth = Auth::find()->where([
@@ -81,7 +83,7 @@ class SiteController extends Controller
                 $user = $auth->user;
                 Yii::$app->user->login($user);
             } else { // signup
-                if (User::find()->where(['email' => $attributes['email']])->exists()) {
+                if (User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [
                         Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $client->getTitle()]),
                     ]);
@@ -89,7 +91,7 @@ class SiteController extends Controller
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
                         'username' => $attributes['login'],
-                        'email' => $attributes['email'],
+                        'email' => $email,
                         'password' => $password,
                     ]);
                     $user->generateAuthKey();
