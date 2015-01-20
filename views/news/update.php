@@ -2,6 +2,13 @@
 
 use yii\helpers\Html;
 
+app\assets\HighlightInitAsset::register($this);
+$this->registerJs("marked.setOptions({
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });");
+
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
 
