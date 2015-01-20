@@ -5,6 +5,13 @@ use yii\widgets\ActiveForm;
 use yii\bootstrap\Alert;
 use ijackua\lepture\Markdowneditor;
 
+app\assets\HighlightInitAsset::register($this);
+$this->registerJs("marked.setOptions({
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });");
+
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
 /* @var $form ActiveForm */

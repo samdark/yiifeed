@@ -6,6 +6,7 @@ use yii\bootstrap\Alert;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $this yii\web\View */
 $this->title = Yii::t('news', 'News admin');
+app\assets\HighlightInitAsset::register($this);
 ?>
 <div class="row news-index">
     <div class="col-xs-12">
