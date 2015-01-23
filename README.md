@@ -56,6 +56,7 @@ Then apply migrations by running:
 
 ```
 yii migrate
+yii migrate --migrationPath=@vendor/chiliec/yii2-vote/migrations
 ```
 
 ### 4. Permissions 
