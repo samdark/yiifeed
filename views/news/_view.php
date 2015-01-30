@@ -53,13 +53,13 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
     </div>
     <div class="col-sm-9 col-md-10 post">
         <h1>
-            <?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
+            <?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['news/view', 'id' => $model->id]) ?>
         </h1>
 
         <div class="content">
             <?php
             $text = HtmlPurifier::process(Markdown::process($model->text));
-            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a('Read more', ['view', 'id' => $model->id]) . '</p>', true);
+            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a('Read more', ['news/view', 'id' => $model->id]) . '</p>', true);
             ?>
 
             <?php if ($isFull): ?>
@@ -67,6 +67,16 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
                 <?php if (!empty($model->link)): ?>
                     <p><?= Html::a(Html::encode($model->link), $model->link) ?></p>
                 <?php endif ?>
+
+                <?php echo \chiliec\vote\Display::widget([
+                    'model_name' => 'news',
+                    'target_id' => $model->id,
+                    'view_aggregate_rating' => true,
+                    'mainDivOptions' => ['class' => 'text-center'],
+                    'classLike' => 'glyphicon glyphicon-thumbs-up',
+                    'classDislike' => 'glyphicon glyphicon-thumbs-down',
+                    'separator' => '&nbsp;',
+                ]); ?>
 
                 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-hashtags="yii" data-url="<?= Url::canonical() ?>" data-text="<?= Html::encode($model->title) ?>">Tweet</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
