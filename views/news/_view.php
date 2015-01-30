@@ -71,6 +71,11 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
                 <?php echo \chiliec\vote\Display::widget([
                     'model_name' => 'news',
                     'target_id' => $model->id,
+                    'view_aggregate_rating' => true,
+                    'mainDivOptions' => ['class' => 'text-center'],
+                    'classLike' => 'glyphicon glyphicon-thumbs-up',
+                    'classDislike' => 'glyphicon glyphicon-thumbs-down',
+                    'separator' => '&nbsp;',
                 ]); ?>
 
                 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-hashtags="yii" data-url="<?= Url::canonical() ?>" data-text="<?= Html::encode($model->title) ?>">Tweet</a>

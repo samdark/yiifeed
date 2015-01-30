@@ -74,10 +74,11 @@ $config = [
     'modules' => [
         'vote' => [
             'class' => 'chiliec\vote\Module',
+            'allow_guests' => false,
+            'allow_change_vote' => true,
             'matchingModels' => [
                 'news' => 0,
             ],
-            'allow_guests' => false,
         ],
     ],
     'params' => $params,
