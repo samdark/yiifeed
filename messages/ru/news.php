@@ -31,4 +31,5 @@ return [
     'Suggest news' => 'Предложить новость',
     'News' => 'Новости',
     'Are you sure you want to delete this item?' => 'Удалить новость?',
+    'Read more' => 'Читать далее',
 ];
