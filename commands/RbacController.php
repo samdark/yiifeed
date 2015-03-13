@@ -37,19 +37,19 @@ class RbacController extends Controller
         $auth->addChild($admin, $adminUsers);
     }
 
-    public function actionAssign($role, $userId)
+    public function actionAssign($role, $username)
     {
-        $user = User::findOne($userId);
+        $user = User::find()->where(['username' => $username])->one();
         if (!$user) {
-            throw new InvalidParamException('There is no such user.');
+            throw new InvalidParamException("There is no user \"$username\".");
         }
 
         $auth = Yii::$app->authManager;
         $role = $auth->getRole($role);
         if (!$role) {
-            throw new InvalidParamException('There is no such role.');
+            throw new InvalidParamException("There is no role \"$role\".");
         }
 
-        $auth->assign($role, $userId);
+        $auth->assign($role, $user->id);
     }
 }
