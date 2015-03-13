@@ -1,7 +1,6 @@
 <?php
-/**
- * @var $model app\models\News
- */
+/* @var $model app\models\News */
+/* @var $commentForm app\models\Comment */
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
@@ -77,3 +76,10 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
         </div>
     </div>
 </div>
+
+<?php if ($isFull): ?>
+    <?= $this->render('_comments', [
+        'comments' => $model->comments,
+        'commentForm' => $commentForm,
+    ]) ?>
+<?php endif ?>

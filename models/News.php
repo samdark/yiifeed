@@ -16,7 +16,11 @@ use yii\behaviors\BlameableBehavior;
  * @property string $text
  * @property string $link
  * @property integer $status
- * @property string $created_at
+ * @property integer $created_at
+ * @property integer $user_id
+ *
+ * @property User $user
+ * @property Comment[] $comments
  */
 class News extends ActiveRecord
 {
@@ -109,5 +113,21 @@ class News extends ActiveRecord
             self::STATUS_PUBLISHED => Yii::t('news', 'Published'),
             self::STATUS_REJECTED => Yii::t('news', 'Rejected'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['news_id' => 'id']);
     }
 }

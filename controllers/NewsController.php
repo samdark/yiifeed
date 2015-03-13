@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\components\feed\Feed;
 use app\components\feed\Item;
+use app\models\Comment;
 use Yii;
 use app\models\News;
 use yii\helpers\Html;
@@ -149,8 +150,17 @@ class NewsController extends Controller
 
     public function actionView($id)
     {
+        $news = $this->findModel($id);
+
+        $commentForm = new Comment();
+        $commentForm->news_id = $news->id;
+        if ($commentForm->load(Yii::$app->request->post()) && $commentForm->save()) {
+            return $this->refresh('#c' . $commentForm->id);
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $news,
+            'commentForm' => $commentForm,
         ]);
     }
 

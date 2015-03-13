@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\News */
+/* @var $commentForm app\models\Comment */
 
 $this->title = $model->title;
 ?>
@@ -25,6 +26,7 @@ $this->title = $model->title;
         <?= $this->render('_view', [
             'isFull' => true,
             'model' => $model,
+            'commentForm' => $commentForm,
         ]) ?>
     </div>
 </div>
