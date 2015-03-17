@@ -52,13 +52,13 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
     </div>
     <div class="col-sm-9 col-md-10 post">
         <h1>
-            <?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>
+            <?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['news/view', 'id' => $model->id]) ?>
         </h1>
 
         <div class="content">
             <?php
             $text = HtmlPurifier::process(Markdown::process($model->text));
-            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a('Read more', ['view', 'id' => $model->id]) . '</p>', true);
+            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a(Yii::t('news', 'Read more'), ['news/view', 'id' => $model->id]) . '</p>', true);
             ?>
 
             <?php if ($isFull): ?>
