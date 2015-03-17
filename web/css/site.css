@@ -131,3 +131,23 @@ a.desc:after {
 .fb-share-button.fb_iframe_widget>span {
     vertical-align: baseline !important;
 }
+
+.comments {
+    list-style: none;
+    padding: 0;
+}
+
+.comments li {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.comments li:last-child {
+    border-bottom: none;
+}
+
+.comments .date {
+    color: #ccc;
+}
