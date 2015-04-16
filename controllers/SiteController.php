@@ -87,7 +87,7 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             if ($auth) { // login
                 $user = $auth->user;
-                Yii::$app->user->login($user);
+                Yii::$app->user->login($user, 3600 * 24 * 30);
             } else { // signup
                 if (User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [
@@ -113,7 +113,7 @@ class SiteController extends Controller
                         ]);
                         if ($auth->save()) {
                             $transaction->commit();
-                            Yii::$app->user->login($user);
+                            Yii::$app->user->login($user, 3600 * 24 * 30);
                         } else {
                             print_r($auth->getErrors());
                             die();
@@ -169,7 +169,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
+                if (Yii::$app->getUser()->login($user, 3600 * 24 * 30)) {
                     return $this->goHome();
                 }
             }
