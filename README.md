@@ -69,8 +69,8 @@ yii rbac/init
 You can use `rbac/assign` to assign roles to users:
 
 ```
-yii rbac/assign admin 3
-yii rbac/assign moderator 5
+yii rbac/assign admin alex
+yii rbac/assign moderator boris
 ```
 
-Will assign admin role to user with id=3 and moderator role to user with id=5.
+Will assign admin role to user with username=alex and moderator role to user with username=boris.
