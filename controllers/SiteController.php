@@ -129,7 +129,7 @@ class SiteController extends Controller
                 $auth = new Auth([
                     'user_id' => Yii::$app->user->id,
                     'source' => $client->getId(),
-                    'source_id' => $attributes['id'],
+                    'source_id' => (string)$attributes['id'],
                 ]);
                 $auth->save();
             }
