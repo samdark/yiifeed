@@ -24,7 +24,7 @@ DIRECTORY STRUCTURE
 REQUIREMENTS
 ------------
 
-The minimum requirement by this application template that your Web server supports PHP 5.4.0.
+The minimum requirement by this application that your Web server supports PHP 5.4.0.
 
 
 INSTALLATION
@@ -38,7 +38,7 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this application template using the following command:
 
 ~~~
-composer global require "fxp/composer-asset-plugin:1.0.0-beta3"
+composer global require "fxp/composer-asset-plugin"
 composer install
 ~~~
 
