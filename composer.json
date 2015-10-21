@@ -12,7 +12,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "ijackua/yii2-lepture-markdown-editor-widget": "dev-master",
-        "yiisoft/yii2-authclient": "*"
+        "yiisoft/yii2-authclient": "*",
+        "chiliec/yii2-vote": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

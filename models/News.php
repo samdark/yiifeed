@@ -52,6 +52,10 @@ class News extends ActiveRecord
                  'createdByAttribute' => 'user_id',
                  'updatedByAttribute' => false,
              ],
+             [
+                 'class' => \chiliec\vote\behaviors\RatingBehavior::className(),
+                 'model_name' => 'news',
+             ],
          ];
      }
 
