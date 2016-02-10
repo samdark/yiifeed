@@ -21,11 +21,15 @@ use yii\helpers\ArrayHelper;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Auth[] $auths
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+
+    private $githubProfileUrl;
 
     /**
      * @inheritdoc
@@ -200,7 +204,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getStatusLabel()
     {
-        $statuses = $this->getStatuses();
+        $statuses = self::getStatuses();
         return ArrayHelper::getValue($statuses, $this->status);
     }
 
@@ -212,4 +216,29 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuths()
+    {
+        return $this->hasMany(Auth::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return string GitHub profile URL or null if user isn't connected with GitHub
+     */
+    public function getGithubProfileUrl()
+    {
+        if ($this->githubProfileUrl !== null) {
+            return $this->githubProfileUrl;
+        }
+
+        foreach ($this->auths as $auth) {
+            if ($auth->source === Auth::SOURCE_GITHUB) {
+                $this->githubProfileUrl = 'http://github.com/' . $this->username;
+                break;
+            }
+        }
+        return $this->githubProfileUrl;
+    }
 }

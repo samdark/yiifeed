@@ -151,3 +151,12 @@ a.desc:after {
 .comments .date {
     color: #ccc;
 }
+
+.post-meta .author img {
+    margin-right: .3em;
+    border-radius: 0.3em;
+}
+
+.post-meta .author a:hover {
+    text-decoration: none;
+}

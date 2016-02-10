@@ -1,6 +1,7 @@
 <?php
 /* @var $model app\models\News */
 /* @var $commentForm app\models\Comment */
+use app\widgets\Avatar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\StringHelper;
@@ -11,6 +12,7 @@ use \yii\helpers\HtmlPurifier;
 
 $isFull = isset($isFull) ? $isFull : false;
 $displayStatus = isset($displayStatus) ? $displayStatus : false;
+$displayUser = isset($displayUser) ? $displayUser : true;
 $displayModeratorButtons = isset($displayModeratorButtons) ? $displayModeratorButtons : false;
 
 // OpenGraph metatags
@@ -34,6 +36,11 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             <?= Yii::$app->formatter->asDate($model->created_at) ?>
         </p>
+        <?php if ($displayUser && $model->user_id): ?>
+        <p class="author">
+            <?= Html::a(Avatar::widget(['user' => $model->user]) . ' @' . Html::encode($model->user->username), ['user/view', 'id' => $model->user->id]) ?>
+        </p>
+        <?php endif ?>
 
         <?php if ($displayStatus): ?>
         <p><?= Yii::t('news', 'Status') .": ". $model->getStatusLabel() ?></p>

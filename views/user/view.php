@@ -16,8 +16,17 @@ use \yii\widgets\ListView;
 <div class="row user-view">
     <div class="col-xs-12">
         <div class="row">
+            <div class="col-xs-2">
+                <?= \app\widgets\Avatar::widget([
+                    'user' => $model,
+                    'size' => 165,
+                ]) ?>
+            </div>
             <div class="col-xs-6">
                 <h1><?= Html::encode($this->title) ?></h1>
+                <?php if ($model->getGithubProfileUrl() !== null): ?>
+                    <h2><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h2>
+                <?php endif ?>
 
                 <?php if (Yii::$app->user->can('adminUsers')): ?>
                 <p>
@@ -33,7 +42,7 @@ use \yii\widgets\ListView;
                 <?php endif ?>
             </div>
             <?php if (Yii::$app->user->id == $model->id): ?>
-            <div class="col-xs-6">
+            <div class="col-xs-4 well">
                 <h2>Connect extra profiles:</h2>
                 <?= yii\authclient\widgets\AuthChoice::widget([
                     'baseAuthUrl' => ['site/auth'],
@@ -41,11 +50,6 @@ use \yii\widgets\ListView;
                 ]) ?>
             </div>
             <?php endif ?>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-
-            </div>
         </div>
 
         <?= ListView::widget([
@@ -57,6 +61,7 @@ use \yii\widgets\ListView;
             'itemView' => '/news/_view',
             'viewParams' => [
                 'displayStatus' => true,
+                'displayUser' => false,
             ],
         ]) ?>
     </div>
