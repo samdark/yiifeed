@@ -77,26 +77,28 @@ class SiteController extends Controller
     {
         $attributes = $client->getUserAttributes();
         $email = ArrayHelper::getValue($attributes, 'email');
+        $id = ArrayHelper::getValue($attributes, 'id');
+        $nickname = ArrayHelper::getValue($attributes, 'login');
 
         /** @var Auth $auth */
         $auth = Auth::find()->where([
             'source' => $client->getId(),
-            'source_id' => $attributes['id'],
+            'source_id' => $id,
         ])->one();
 
         if (Yii::$app->user->isGuest) {
             if ($auth) { // login
                 $user = $auth->user;
-                Yii::$app->user->login($user, 3600 * 24 * 30);
+                Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
             } else { // signup
-                if (User::find()->where(['email' => $email])->exists()) {
+                if ($email !== null && User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [
                         Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $client->getTitle()]),
                     ]);
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
-                        'username' => $attributes['login'],
+                        'username' => $nickname,
                         'email' => $email,
                         'password' => $password,
                     ]);
@@ -109,11 +111,11 @@ class SiteController extends Controller
                         $auth = new Auth([
                             'user_id' => $user->id,
                             'source' => $client->getId(),
-                            'source_id' => (string)$attributes['id'],
+                            'source_id' => (string)$id,
                         ]);
                         if ($auth->save()) {
                             $transaction->commit();
-                            Yii::$app->user->login($user, 3600 * 24 * 30);
+                            Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
                         } else {
                             print_r($auth->getErrors());
                             die();
@@ -131,7 +133,26 @@ class SiteController extends Controller
                     'source' => $client->getId(),
                     'source_id' => (string)$attributes['id'],
                 ]);
-                $auth->save();
+                if ($auth->save()) {
+                    Yii::$app->getSession()->setFlash('success', [
+                        Yii::t('app', 'Linked {client} account.', [
+                            'client' => $client->getTitle()
+                        ]),
+                    ]);
+                } else {
+                    Yii::$app->getSession()->setFlash('error', [
+                        Yii::t('app', 'Unable to link {client} account: {errors}', [
+                            'client' => $client->getTitle(),
+                            'errors' => json_encode($auth->getErrors()),
+                        ]),
+                    ]);
+                }
+            } else { // there's existing auth
+                Yii::$app->getSession()->setFlash('error', [
+                    Yii::t('app',
+                        'Unable to link {client} account. There is another user using it.',
+                        ['client' => $client->getTitle()]),
+                ]);
             }
         }
     }
