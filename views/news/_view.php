@@ -57,7 +57,10 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
 
         <div class="content">
             <?php
-            $text = HtmlPurifier::process(Markdown::process($model->text));
+            $text = HtmlPurifier::process(Markdown::process($model->text), [
+                'HTML.SafeIframe' => true,
+                'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+            ]);
             echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a(Yii::t('news', 'Read more'), ['news/view', 'id' => $model->id]) . '</p>', true);
             ?>
 
