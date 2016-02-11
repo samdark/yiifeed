@@ -6,8 +6,10 @@
 
 <?php
 use app\widgets\Avatar;
+use yii\helpers\Markdown;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use \yii\helpers\HtmlPurifier;
 ?>
 
 <h2>Comments</h2>
@@ -19,7 +21,10 @@ use yii\helpers\Html;
             <?= Html::a(Avatar::widget(['user' => $comment->user]) . ' ' . Html::encode($comment->user->username), ['user/view', 'id' => $comment->user->id]) ?>
         </div>
         <div class="col-xs-8 text well">
-            <?= \yii\helpers\Markdown::process($comment->text) ?>
+            <?= HtmlPurifier::process(Markdown::process($comment->text), [
+                'HTML.SafeIframe' => true,
+                'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+            ]) ?>
         </div>
         <div class="col-xs-3">
             <a href="#c<?= $comment->id ?>">#<?= $comment->id ?></a>

@@ -4,7 +4,6 @@
 use app\widgets\Avatar;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
 use yii\helpers\Markdown;
 use \yii\helpers\HtmlPurifier;
 
@@ -63,13 +62,10 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
         </h1>
 
         <div class="content">
-            <?php
-            $text = HtmlPurifier::process(Markdown::process($model->text), [
+            <?= HtmlPurifier::process(Markdown::process($model->text), [
                 'HTML.SafeIframe' => true,
                 'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-            ]);
-            echo $text;
-            ?>
+            ]) ?>
 
             <?php if ($isFull): ?>
             <div class="meta">
