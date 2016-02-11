@@ -21,7 +21,7 @@ use \yii\helpers\HtmlPurifier;
             <?= Html::a(Avatar::widget(['user' => $comment->user]) . ' ' . Html::encode($comment->user->username), ['user/view', 'id' => $comment->user->id]) ?>
         </div>
         <div class="col-xs-8 text well">
-            <?= HtmlPurifier::process(Markdown::process($comment->text), [
+            <?= HtmlPurifier::process(Markdown::process($comment->text, 'gfm-comment'), [
                 'HTML.SafeIframe' => true,
                 'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
             ]) ?>
