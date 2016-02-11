@@ -15,16 +15,17 @@ $this->title = 'About YiiFeed';
             News could be read both in browser and via RSS subscription.</p>
 
         <p>It was started in the end of 2014 both to serve as the place to get news about Yii in convenient way and
-            as an educational project.</p>
+            as an educational project. Education-wise project is very far from being perfect. Improvements are welcome.</p>
 
         <h2>Project sources</h2>
 
-        <p>Project is <a href="https://github.com/samdark/yiifeed">open sourced at GitHub</a>. You've very welcome to
-        contribute in form of issue reports and pull requests.</p>
+        <p>It is <a href="https://github.com/samdark/yiifeed">open sourced at GitHub</a> under BSD license.
+           You've very welcome to contribute in form of issue reports and pull requests.</p>
 
         <h2>Team</h2>
 
-        <p>Initially the project was created by Alexander Makarov and Cvigun Vadim. You can check
-            <a href="https://github.com/samdark/yiifeed/graphs/contributors">all contributors at GitHub</a>.</p>
+        <p>Initially the project was created by <a href="https://github.com/samdark">Alexander Makarov</a>
+            and <a href="https://github.com/tsvadim">Cvigun Vadim</a>. Currently maintained and hosted by Alexander.
+            You can check <a href="https://github.com/samdark/yiifeed/graphs/contributors">all contributors at GitHub</a>.</p>
     </div>
 </div>
