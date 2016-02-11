@@ -68,7 +68,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
                 'HTML.SafeIframe' => true,
                 'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
             ]);
-            echo $isFull ? $text : StringHelper::truncateWords($text, 70, '<p>' . Html::a(Yii::t('news', 'Read more'), ['news/view', 'id' => $model->id]) . '</p>', true);
+            echo $text;
             ?>
 
             <?php if ($isFull): ?>
