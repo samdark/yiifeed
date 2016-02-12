@@ -108,13 +108,10 @@ class NewsController extends Controller
         $feed->render();
     }
 
-    public function actionAdmin($status = null)
+    public function actionAdmin($status)
     {
         $query = News::find()->orderBy('id DESC');
-
-        if ($status !== null) {
-            $query->andWhere(['status' => $status]);
-        }
+        $query->andWhere(['status' => $status]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

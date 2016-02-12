@@ -5,6 +5,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\News;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -42,7 +43,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
-                $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin'], 'visible'=> \Yii::$app->user->can('adminNews')];
+                $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin', 'status' => News::STATUS_PROPOSED], 'visible'=> \Yii::$app->user->can('adminNews')];
                 $menuItems[] = ['label' => 'User admin', 'url' => ['/user/index'], 'visible'=> \Yii::$app->user->can('adminUsers')];
                 $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/user/view', 'id' => \Yii::$app->user->id]];
                 $menuItems[] = [
