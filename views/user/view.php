@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
+/* @var $authClients \yii\authclient\ClientInterface[] */
+
 $this->title = $model->username;
 
 use \yii\widgets\ListView;
@@ -41,12 +42,13 @@ use \yii\widgets\ListView;
                 </p>
                 <?php endif ?>
             </div>
-            <?php if (Yii::$app->user->id == $model->id): ?>
+            <?php if (count($authClients) > 0): ?>
             <div class="col-xs-4 well">
                 <h2>Connect extra profiles:</h2>
                 <?= yii\authclient\widgets\AuthChoice::widget([
                     'baseAuthUrl' => ['site/auth'],
                     'popupMode' => false,
+                    'clients' => $authClients,
                 ]) ?>
             </div>
             <?php endif ?>

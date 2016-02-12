@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\User;
 use app\models\News;
+use yii\authclient\Collection;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,9 +66,22 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        /** @var User $user */
         $user = User::findOne($id);
         if (!$user) {
             throw new NotFoundHttpException("No such user.");
+        }
+
+        $authClients = [];
+        if (Yii::$app->user->id == $user->id) {
+            // get clients user isn't connected with yet
+            $auths = $user->auths;
+            /** @var Collection $clientCollection */
+            $clientCollection = Yii::$app->authClientCollection;
+            $authClients = $clientCollection->getClients();
+            foreach ($auths as $auth) {
+                unset($authClients[$auth->source]);
+            }
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -78,6 +92,7 @@ class UserController extends Controller
         return $this->render('view', [
             'model' => $user,
             'dataProvider' => $dataProvider,
+            'authClients' => $authClients,
         ]);
     }
 
