@@ -39,21 +39,21 @@ class News extends ActiveRecord
         return '{{%news}}';
     }
 
-     public function behaviors()
-     {
-         return [
-             [
-                 'class' => TimestampBehavior::className(),
-                 //'createdAtAttribute' => 'create_time',
-                 'updatedAtAttribute' => false,
-             ],
-             [
-                 'class' => BlameableBehavior::className(),
-                 'createdByAttribute' => 'user_id',
-                 'updatedByAttribute' => false,
-             ],
-         ];
-     }
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                //'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => false,
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false,
+            ],
+        ];
+    }
 
     public function scenarios()
     {
@@ -74,6 +74,7 @@ class News extends ActiveRecord
             [['text'], 'string'],
             [['status'], 'default', 'value' => self::STATUS_PROPOSED],
             [['status'], 'integer'],
+            [['status'], 'filter', 'filter' => 'intval'],
             [['title'], 'string', 'max' => 250],
             [['link'], 'string', 'max' => 250],
             [['link'], 'url', 'skipOnEmpty' => true],
@@ -129,5 +130,21 @@ class News extends ActiveRecord
     public function getComments()
     {
         return $this->hasMany(Comment::className(), ['news_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // when publishing time should be updated
+            if ($this->status === self::STATUS_PUBLISHED && $this->getOldAttribute('status') !== self::STATUS_PUBLISHED) {
+               $this->created_at = time();
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }
