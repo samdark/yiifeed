@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\AuthHandler;
 use app\models\Auth;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
@@ -75,86 +76,7 @@ class SiteController extends Controller
      */
     public function onAuthSuccess($client)
     {
-        $attributes = $client->getUserAttributes();
-        $email = ArrayHelper::getValue($attributes, 'email');
-        $id = ArrayHelper::getValue($attributes, 'id');
-        $nickname = ArrayHelper::getValue($attributes, 'login');
-
-        /** @var Auth $auth */
-        $auth = Auth::find()->where([
-            'source' => $client->getId(),
-            'source_id' => $id,
-        ])->one();
-
-        if (Yii::$app->user->isGuest) {
-            if ($auth) { // login
-                $user = $auth->user;
-                Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
-            } else { // signup
-                if ($email !== null && User::find()->where(['email' => $email])->exists()) {
-                    Yii::$app->getSession()->setFlash('error', [
-                        Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $client->getTitle()]),
-                    ]);
-                } else {
-                    $password = Yii::$app->security->generateRandomString(6);
-                    $user = new User([
-                        'username' => $nickname,
-                        'email' => $email,
-                        'password' => $password,
-                    ]);
-                    $user->generateAuthKey();
-                    $user->generatePasswordResetToken();
-
-                    $transaction = $user->getDb()->beginTransaction();
-
-                    if ($user->save()) {
-                        $auth = new Auth([
-                            'user_id' => $user->id,
-                            'source' => $client->getId(),
-                            'source_id' => (string)$id,
-                        ]);
-                        if ($auth->save()) {
-                            $transaction->commit();
-                            Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
-                        } else {
-                            print_r($auth->getErrors());
-                            die();
-                        }
-                    } else {
-                        print_r($user->getErrors());
-                        die();
-                    }
-                }
-            }
-        } else { // user already logged in
-            if (!$auth) { // add auth provider
-                $auth = new Auth([
-                    'user_id' => Yii::$app->user->id,
-                    'source' => $client->getId(),
-                    'source_id' => (string)$attributes['id'],
-                ]);
-                if ($auth->save()) {
-                    Yii::$app->getSession()->setFlash('success', [
-                        Yii::t('app', 'Linked {client} account.', [
-                            'client' => $client->getTitle()
-                        ]),
-                    ]);
-                } else {
-                    Yii::$app->getSession()->setFlash('error', [
-                        Yii::t('app', 'Unable to link {client} account: {errors}', [
-                            'client' => $client->getTitle(),
-                            'errors' => json_encode($auth->getErrors()),
-                        ]),
-                    ]);
-                }
-            } else { // there's existing auth
-                Yii::$app->getSession()->setFlash('error', [
-                    Yii::t('app',
-                        'Unable to link {client} account. There is another user using it.',
-                        ['client' => $client->getTitle()]),
-                ]);
-            }
-        }
+        (new AuthHandler($client))->handle();
     }
 
     public function actionLogin()
