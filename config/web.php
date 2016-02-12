@@ -45,19 +45,8 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
         'i18n' => [
             'translations' => [
-                'news*' => [
+                '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    //'basePath' => '@app/messages',
-                    //'sourceLanguage' => 'en-US',
-                    'fileMap' => [
-                        'news' => 'news.php',
-                    ],
-                ],
-                'user*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'fileMap' => [
-                        'user' => 'user.php',
-                    ],
                 ],
             ],
         ],
