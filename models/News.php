@@ -71,13 +71,13 @@ class News extends ActiveRecord
     {
         return [
             [['title', 'text', 'status'], 'required'],
-            [['text'], 'string'],
-            [['status'], 'default', 'value' => self::STATUS_PROPOSED],
-            [['status'], 'integer'],
-            [['status'], 'filter', 'filter' => 'intval'],
-            [['title'], 'string', 'max' => 250],
-            [['link'], 'string', 'max' => 250],
-            [['link'], 'url', 'skipOnEmpty' => true],
+            ['text', 'string'],
+            ['status', 'default', 'value' => self::STATUS_PROPOSED],
+            ['status', 'integer'],
+            ['status', 'filter', 'filter' => 'intval'],
+            ['title', 'string', 'max' => 250],
+            ['link', 'string', 'max' => 250],
+            ['link', 'url', 'skipOnEmpty' => true],
         ];
     }
 
