@@ -1,7 +1,6 @@
 <?php
 use app\models\News;
 use \yii\widgets\ListView;
-use yii\bootstrap\Alert;
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $this yii\web\View */
