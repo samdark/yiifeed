@@ -47,6 +47,11 @@ $config = [
             'translations' => [
                 '*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
+                    'fileMap' => [
+                        'news' => 'news.php',
+                        'user' => 'user.php',
+                        'comments' => 'comments.php',
+                    ],
                 ],
             ],
         ],
