@@ -11,10 +11,19 @@ use yii\helpers\Markdown;
     <div class="col-xs-1 author">
         <?= Html::a(Avatar::widget(['user' => $model->user]) . ' ' . Html::encode($model->user->username), ['user/view', 'id' => $model->user->id]) ?>
     </div>
-    <div class="col-xs-8 text well">
+    <div class="col-xs-6 text well">
         <?= HtmlPurifier::process(Markdown::process($model->text, 'gfm-comment'), [
             'HTML.SafeIframe' => true,
             'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+        ]) ?>
+    </div>
+    <div class="col-xs-2">
+        <?= Html::a(Yii::t('comments', 'Delete'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => Yii::t('comments', 'Are you sure you want to delete this item?'),
+                'method' => 'post',
+            ],
         ]) ?>
     </div>
     <div class="col-xs-3">

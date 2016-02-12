@@ -1,13 +1,11 @@
 <?php
-
-
 namespace app\controllers;
-
 
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class CommentController extends Controller
 {
@@ -19,11 +17,11 @@ class CommentController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index'], //only be applied to
+                'only' => ['index', 'delete'], //only be applied to
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index', 'delete'],
                         'roles' => ['adminNews'],
                     ],
                 ],
@@ -42,5 +40,27 @@ class CommentController extends Controller
         return $this->render('index',[
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds model by id, throws 404 if not found
+     *
+     * @param integer $id
+     * @return Comment
+     * @throws NotFoundHttpException
+     */
+    protected function findModel($id)
+    {
+        if (($model = Comment::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }
