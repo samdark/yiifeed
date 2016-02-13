@@ -37,6 +37,13 @@ AppAsset::register($this);
             ]);
 
             $menuItems = [
+                '<form id="searchbox_006237035567373325440:lmymu4nwvsa" action="http://www.google.com/search" class="col-xs-1 navbar-form">
+                    <fieldset class="form-group">
+                        <input id="search_input" name="q" type="text" size="20" maxlength="256" class="form-control" placeholder="Search for...">
+                        <input type="hidden" name="cx" value="006237035567373325440:lmymu4nwvsa">
+                        <input type="hidden" name="cof" value="FORID:0">
+                    </fieldset>
+                </form>',
                 ['label' => 'RSS', 'url' => ['/news/rss']],
             ];
             if (Yii::$app->user->isGuest) {
@@ -53,11 +60,11 @@ AppAsset::register($this);
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
+            ?>
 
-            if (!\Yii::$app->user->isGuest) {
-                echo yii\helpers\Html::a(Yii::t('news', 'Suggest news'), ['news/suggest'], ['class' => 'btn btn-success navbar-btn']);
-            }
+            <?= yii\helpers\Html::a(Yii::t('news', 'Suggest news'), ['news/suggest'], ['class' => 'btn btn-success navbar-btn']) ?>
 
+            <?php
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
