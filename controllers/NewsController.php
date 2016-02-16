@@ -49,7 +49,7 @@ class NewsController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find()->where(['status'=>News::STATUS_PUBLISHED])->orderBy('id DESC'),
+            'query' => News::find()->where(['status'=>News::STATUS_PUBLISHED])->orderBy('created_at DESC'),
             'pagination' => ['pageSize' => 10],
         ]);
 
@@ -78,7 +78,7 @@ class NewsController extends Controller
     public function actionRss()
     {
         /** @var News[] $news */
-        $news = News::find()->where(['status' => News::STATUS_PUBLISHED])->orderBy('id DESC')->limit(50)->all();
+        $news = News::find()->where(['status' => News::STATUS_PUBLISHED])->orderBy('created_at DESC')->limit(50)->all();
 
         $feed = new Feed();
         $feed->title = 'YiiFeed';
@@ -110,7 +110,7 @@ class NewsController extends Controller
 
     public function actionAdmin($status)
     {
-        $query = News::find()->orderBy('id DESC');
+        $query = News::find()->orderBy('created_at DESC');
         $query->andWhere(['status' => $status]);
 
         $dataProvider = new ActiveDataProvider([
