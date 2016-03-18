@@ -62,7 +62,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
         </h1>
 
         <div class="content">
-            <?= HtmlPurifier::process(Markdown::process($model->text, 'gfm-comment'), [
+            <?= HtmlPurifier::process(Markdown::process($model->text, 'gfm'), [
                 'HTML.SafeIframe' => true,
                 'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
             ]) ?>
