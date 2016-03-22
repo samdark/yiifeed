@@ -160,3 +160,7 @@ a.desc:after {
 .post-meta .author a:hover {
     text-decoration: none;
 }
+
+.navbar-form {
+    margin: 8px 0;
+}
