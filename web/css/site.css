@@ -164,3 +164,8 @@ a.desc:after {
 .navbar-form {
     margin: 8px 0;
 }
+
+.user-view-avatar {
+    float: left;
+    margin: 0 15px 15px 0;
+}

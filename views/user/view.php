@@ -17,39 +17,42 @@ use \yii\widgets\ListView;
 <div class="row user-view">
     <div class="col-xs-12">
         <div class="row">
-            <div class="col-xs-2">
-                <?= \app\widgets\Avatar::widget([
-                    'user' => $model,
-                    'size' => 165,
-                ]) ?>
-            </div>
-            <div class="col-xs-6">
+            <div class="col-sm-8 clearfix">
+                <div class="user-view-avatar">
+                    <?= \app\widgets\Avatar::widget([
+                        'user' => $model,
+                        'size' => 165,
+                    ]) ?>
+                </div>
+
                 <h1><?= Html::encode($this->title) ?></h1>
                 <?php if ($model->getGithubProfileUrl() !== null): ?>
-                    <h2><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h2>
+                    <h3><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h3>
                 <?php endif ?>
 
                 <?php if (Yii::$app->user->can('adminUsers')): ?>
-                <p>
-                    <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                        'class' => 'btn btn-danger',
-                        'data' => [
-                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                            'method' => 'post',
-                        ],
-                    ]) ?>
-                </p>
+                    <p>
+                        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                'method' => 'post',
+                            ],
+                        ]) ?>
+                    </p>
                 <?php endif ?>
             </div>
             <?php if (count($authClients) > 0): ?>
-            <div class="col-xs-4 well">
-                <h2>Connect extra profiles:</h2>
-                <?= yii\authclient\widgets\AuthChoice::widget([
-                    'baseAuthUrl' => ['site/auth'],
-                    'popupMode' => false,
-                    'clients' => $authClients,
-                ]) ?>
+            <div class="col-sm-4">
+                <div class="well well-sm">
+                    <h2>Connect extra profiles:</h2>
+                    <?= yii\authclient\widgets\AuthChoice::widget([
+                        'baseAuthUrl' => ['site/auth'],
+                        'popupMode' => false,
+                        'clients' => $authClients,
+                    ]) ?>
+                </div>
             </div>
             <?php endif ?>
         </div>
