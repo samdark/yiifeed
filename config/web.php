@@ -12,9 +12,10 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
         ],
+        'rollbar' => require __DIR__ . '/rollbar.php',
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => require 'key.php',
+            'cookieValidationKey' => require __DIR__ . '/key.php',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -31,7 +32,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => YII_DEBUG,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -57,15 +58,26 @@ $config = [
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
-            'clients' => require 'authclients.php',
+            'clients' => require __DIR__ . '/authclients.php',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'rules' => require 'urls.php',
+            'rules' => require __DIR__ . '/urls.php',
             'showScriptName' => false,
         ],
     ],
     'params' => $params,
+    'on beforeRequest' => function () {
+        $pathInfo = Yii::$app->request->pathInfo;
+        $query = Yii::$app->request->queryString;
+        if (!empty($pathInfo) && substr($pathInfo, -1) === '/') {
+            $url = '/' . substr($pathInfo, 0, -1);
+            if ($query) {
+                $url .= '?' . $query;
+            }
+            Yii::$app->response->redirect($url, 301);
+        }
+    },
 ];
 
 if (YII_ENV_DEV) {
@@ -75,6 +87,9 @@ if (YII_ENV_DEV) {
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = 'yii\gii\Module';
+} else {
+    $config['bootstrap'][] = 'rollbar';
+    $config['components']['errorHandler']['class'] = 'baibaratsky\yii\rollbar\web\ErrorHandler';
 }
 
 return $config;

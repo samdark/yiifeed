@@ -1,4 +1,6 @@
 <?php
+\app\assets\CodeMirrorAsset::register($this);
+\app\assets\MarkdownEditorAsset::register($this);
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -7,12 +9,9 @@ use ijackua\lepture\Markdowneditor;
 /* @var $model app\models\News */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'news-form']); ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => 50]) ?>
-    <?= Markdowneditor::widget([
-        'model' => $model,
-        'attribute' => 'text',
-    ]) ?>
+    <?= $form->field($model, 'text')->textarea() ?>
 
     <?= $form->field($model, 'link')->textInput(['maxlength' => 255]) ?>
     <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>

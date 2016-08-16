@@ -30,6 +30,7 @@ phpunit.phar
 /config/key.php
 /config/db.php
 /config/authclients.php
+/config/rollbar.php
 
 # rbac items
 /rbac

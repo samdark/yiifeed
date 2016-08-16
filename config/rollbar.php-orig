@@ -1,0 +1,4 @@
+return [
+    'class' => 'baibaratsky\yii\rollbar\Rollbar',
+    'accessToken' => 'token_should_be_here',
+];

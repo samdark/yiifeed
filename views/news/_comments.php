@@ -10,6 +10,9 @@ use yii\helpers\Markdown;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use \yii\helpers\HtmlPurifier;
+
+\app\assets\CodeMirrorAsset::register($this);
+\app\assets\MarkdownEditorAsset::register($this);
 ?>
 
 <h2>Comments</h2>

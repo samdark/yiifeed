@@ -4,6 +4,9 @@ namespace app\controllers;
 use app\components\feed\Feed;
 use app\components\feed\Item;
 use app\models\Comment;
+use app\notifier\NewCommentNotification;
+use app\notifier\NewSuggestionNotification;
+use app\notifier\Notifier;
 use Yii;
 use app\models\News;
 use yii\helpers\Html;
@@ -66,6 +69,8 @@ class NewsController extends Controller
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $notifier = new Notifier(new NewSuggestionNotification($model));
+            $notifier->sendEmails();
             Yii::$app->session->setFlash('news.news_successfully_added');
             return $this->redirect(['index']);
         }
@@ -152,6 +157,7 @@ class NewsController extends Controller
         $commentForm = new Comment();
         $commentForm->news_id = $news->id;
         if ($commentForm->load(Yii::$app->request->post()) && $commentForm->save()) {
+            $this->notifyAboutComment($news, $commentForm);
             return $this->refresh('#c' . $commentForm->id);
         }
 
@@ -159,6 +165,28 @@ class NewsController extends Controller
             'model' => $news,
             'commentForm' => $commentForm,
         ]);
+    }
+
+    private function notifyAboutComment(News $news, Comment $comment)
+    {
+        $users = [];
+
+        // news author
+        if ($comment->user_id !== $news->user_id) {
+            $users[] = $news->user;
+        }
+
+        foreach ($news->comments as $existingComment) {
+            if ($comment->user_id !== $existingComment->user_id) {
+                $users[] = $existingComment->user;
+            }
+        }
+
+
+        foreach ($users as $user) {
+            $notifier = new Notifier(new NewCommentNotification($comment, $user));
+            $notifier->sendEmails();
+        }
     }
 
     protected function findModel($id)

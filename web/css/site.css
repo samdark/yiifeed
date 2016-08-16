@@ -169,3 +169,13 @@ a.desc:after {
     float: left;
     margin: 0 15px 15px 0;
 }
+
+/* Markdown Editor */
+
+.CodeMirror-buttonsPanel {
+    margin-bottom: 0.4em;
+}
+
+.CodeMirror-buttonsPanel button {
+    margin-right: 0.4em;
+}
