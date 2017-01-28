@@ -45,11 +45,11 @@ class RbacController extends Controller
         }
 
         $auth = Yii::$app->authManager;
-        $role = $auth->getRole($role);
-        if (!$role) {
+        $roleObject = $auth->getRole($role);
+        if (!$roleObject) {
             throw new InvalidParamException("There is no role \"$role\".");
         }
 
-        $auth->assign($role, $user->id);
+        $auth->assign($roleObject, $user->id);
     }
 }
