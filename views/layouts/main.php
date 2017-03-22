@@ -1,4 +1,5 @@
 <?php
+use app\helpers\GoogleAnalytics;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -90,6 +91,8 @@ AppAsset::register($this);
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
+
+    <?php GoogleAnalytics::track('UA-96093853-1') ?>
 
 <?php $this->endBody() ?>
 </body>
