@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\components\UserPermissions;
 use app\models\Comment;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -22,7 +23,7 @@ class CommentController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index', 'delete'],
-                        'roles' => ['adminNews'],
+                        'roles' => [UserPermissions::ADMIN_NEWS],
                     ],
                 ],
             ],
@@ -59,8 +60,7 @@ class CommentController extends Controller
     {
         if (($model = Comment::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

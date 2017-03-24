@@ -30,6 +30,7 @@ class News extends ActiveRecord
 
     const SCENARIO_SUGGEST = 'suggest';
     const SCENARIO_UPDATE = 'update';
+    const SCENARIO_ADMIN = 'admin';
 
     /**
      * @inheritdoc
@@ -39,12 +40,14 @@ class News extends ActiveRecord
         return '{{%news}}';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::className(),
-                //'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => false,
             ],
             [
@@ -55,11 +58,15 @@ class News extends ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function scenarios()
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_SUGGEST] = ['title', 'text', 'link'];
-        $scenarios[self::SCENARIO_UPDATE] = ['title', 'text', 'link', 'status'];
+        $scenarios[self::SCENARIO_UPDATE] = ['title', 'text', 'link'];
+        $scenarios[self::SCENARIO_ADMIN] = ['title', 'text', 'link', 'status'];
         return $scenarios;
     }
 
@@ -96,17 +103,29 @@ class News extends ActiveRecord
         ];
     }
 
+    /**
+     * @return string status as string
+     */
     public function getStatusLabel()
     {
         return static::statusLabel($this->status);
     }
 
+    /**
+     * Returns a string representation of status
+     *
+     * @param int $status
+     * @return string
+     */
     public static function statusLabel($status)
     {
         $statuses = static::getStatuses();
         return ArrayHelper::getValue($statuses, $status);
     }
 
+    /**
+     * @return array statuses available
+     */
     public static function getStatuses()
     {
         return [
@@ -137,14 +156,14 @@ class News extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            // when publishing time should be updated
-            if ($this->status === self::STATUS_PUBLISHED && $this->getOldAttribute('status') !== self::STATUS_PUBLISHED) {
-               $this->created_at = time();
-            }
-            return true;
-        } else {
+        if (!parent::beforeSave($insert)) {
             return false;
         }
+
+        // when publishing time should be updated
+        if ($this->status === self::STATUS_PUBLISHED && $this->getOldAttribute('status') !== self::STATUS_PUBLISHED) {
+           $this->created_at = time();
+        }
+        return true;
     }
 }

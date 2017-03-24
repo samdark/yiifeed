@@ -18,7 +18,10 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'text')->textarea() ?>
 
 <?= $form->field($model, 'link')->textInput(['maxlength' => 250]) ?>
-<?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>
+
+<?php if (\app\components\UserPermissions::canAdminNews()): ?>
+    <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>
+<?php endif ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('news', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

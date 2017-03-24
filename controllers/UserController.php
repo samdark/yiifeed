@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\UserPermissions;
 use Yii;
 use app\models\User;
 use app\models\News;
@@ -16,6 +17,9 @@ use yii\filters\AccessControl;
  */
 class UserController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -30,7 +34,7 @@ class UserController extends Controller
                     [
                         'allow' => true,
                         'actions' => ['index', 'create', 'update', 'delete'],
-                        'roles' => ['adminUsers'],
+                        'roles' => [UserPermissions::ADMIN_USERS],
                     ],
                 ],
             ],
@@ -69,7 +73,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = User::findOne($id);
         if (!$user) {
-            throw new NotFoundHttpException("No such user.");
+            throw new NotFoundHttpException('No such user.');
         }
 
         $authClients = [];
@@ -109,11 +113,11 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -142,8 +146,7 @@ class UserController extends Controller
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

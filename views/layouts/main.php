@@ -1,4 +1,5 @@
 <?php
+use app\components\UserPermissions;
 use app\helpers\GoogleAnalytics;
 use app\widgets\Alert;
 use yii\helpers\Html;
@@ -53,7 +54,7 @@ AppAsset::register($this);
             } else {
                 $menuItems[] = ['label' => 'Comments', 'url' => ['/comment/index'], 'visible'=> \Yii::$app->user->can('adminNews')];
                 $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin', 'status' => News::STATUS_PROPOSED], 'visible'=> \Yii::$app->user->can('adminNews')];
-                $menuItems[] = ['label' => 'User admin', 'url' => ['/user/index'], 'visible'=> \Yii::$app->user->can('adminUsers')];
+                $menuItems[] = ['label' => 'User admin', 'url' => ['/user/index'], 'visible'=> UserPermissions::canAdminUsers()];
                 $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/user/view', 'id' => \Yii::$app->user->id]];
                 $menuItems[] = [
                     'label' => 'Logout',

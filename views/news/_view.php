@@ -1,6 +1,7 @@
 <?php
 /* @var $model app\models\News */
 /* @var $commentForm app\models\Comment */
+use app\components\UserPermissions;
 use app\widgets\Avatar;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -47,13 +48,15 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
 
         <?php if ($displayModeratorButtons): ?>
             <?= Html::a(Yii::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Yii::t('news', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('news', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
+            <?php if (UserPermissions::canAdminNews()): ?>
+                <?= Html::a(Yii::t('news', 'Delete'), ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => Yii::t('news', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            <?php endif ?>
         <?php endif ?>
     </div>
     <div class="col-sm-9 col-md-10 post">

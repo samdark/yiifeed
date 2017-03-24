@@ -1,5 +1,6 @@
 <?php
 
+use app\components\UserPermissions;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -30,7 +31,7 @@ use \yii\widgets\ListView;
                     <h3><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h3>
                 <?php endif ?>
 
-                <?php if (Yii::$app->user->can('adminUsers')): ?>
+                <?php if (UserPermissions::canAdminUsers()): ?>
                     <p>
                         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [

@@ -1,6 +1,7 @@
 <?php
 namespace app\commands;
 
+use app\components\UserPermissions;
 use app\models\User;
 use Yii;
 use yii\base\InvalidParamException;
@@ -17,11 +18,11 @@ class RbacController extends Controller
         $auth = Yii::$app->authManager;
         $auth->removeAll();
 
-        $adminNews = $auth->createPermission('adminNews');
+        $adminNews = $auth->createPermission(UserPermissions::ADMIN_NEWS);
         $adminNews->description = 'Administrate news';
         $auth->add($adminNews);
 
-        $adminUsers = $auth->createPermission('adminUsers');
+        $adminUsers = $auth->createPermission(UserPermissions::ADMIN_USERS);
         $adminUsers->description = 'Administrate users';
         $auth->add($adminUsers);
 

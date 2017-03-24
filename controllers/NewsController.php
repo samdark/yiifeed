@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\components\feed\Feed;
 use app\components\feed\Item;
+use app\components\UserPermissions;
 use app\models\Comment;
 use app\notifier\NewCommentNotification;
 use app\notifier\NewSuggestionNotification;
@@ -16,6 +17,7 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -26,17 +28,17 @@ class NewsController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['suggest', 'admin', 'create', 'update', 'delete'], //only be applied to
+                'only' => ['suggest', 'admin', 'update', 'delete'], //only be applied to
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['suggest'],
+                        'actions' => ['suggest', 'update'],
                         'roles' => ['@'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['admin', 'create', 'update', 'delete'],
-                        'roles' => ['adminNews'],
+                        'actions' => ['admin', 'delete'],
+                        'roles' => [UserPermissions::ADMIN_NEWS],
                     ],
                 ],
             ],
@@ -132,14 +134,22 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'update';
+        if (!UserPermissions::canEditNews($model)) {
+            throw new ForbiddenHttpException('You are not allowed to edit this news.');
+        }
+
+        if (UserPermissions::canAdminNews()) {
+            $model->scenario = News::SCENARIO_ADMIN;
+        } else {
+            $model->scenario = News::SCENARIO_UPDATE;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     public function actionDelete($id)
@@ -193,9 +203,8 @@ class NewsController extends Controller
     {
         if (($model = News::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
 
