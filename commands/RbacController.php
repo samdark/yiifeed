@@ -11,7 +11,7 @@ class RbacController extends Controller
 {
     public function actionInit()
     {
-        if (!$this->confirm("Are you sure? It will re-create permissions tree.")) {
+        if (!$this->confirm('Are you sure? It will re-create permissions tree.')) {
             return self::EXIT_CODE_NORMAL;
         }
 

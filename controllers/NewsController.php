@@ -21,8 +21,14 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+/**
+ * NewsController
+ */
 class NewsController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -51,6 +57,9 @@ class NewsController extends Controller
         ];
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -63,6 +72,9 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function actionSuggest()
     {
         $model = new News([
@@ -115,6 +127,10 @@ class NewsController extends Controller
         $feed->render();
     }
 
+    /**
+     * @param int $status
+     * @return string
+     */
     public function actionAdmin($status)
     {
         $query = News::find()->orderBy('created_at DESC');
@@ -131,6 +147,11 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * @param int $id
+     * @return string|\yii\web\Response
+     * @throws ForbiddenHttpException
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -152,6 +173,10 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * @param int $id
+     * @return \yii\web\Response
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -160,6 +185,10 @@ class NewsController extends Controller
     }
 
 
+    /**
+     * @param int $id
+     * @return string|\yii\web\Response
+     */
     public function actionView($id)
     {
         $news = $this->findModel($id);
@@ -177,6 +206,10 @@ class NewsController extends Controller
         ]);
     }
 
+    /**
+     * @param News $news
+     * @param Comment $comment
+     */
     private function notifyAboutComment(News $news, Comment $comment)
     {
         $users = [];
@@ -199,6 +232,11 @@ class NewsController extends Controller
         }
     }
 
+    /**
+     * @param int $id
+     * @return null|News
+     * @throws NotFoundHttpException
+     */
     protected function findModel($id)
     {
         if (($model = News::findOne($id)) !== null) {

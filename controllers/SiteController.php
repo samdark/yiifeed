@@ -3,21 +3,21 @@
 namespace app\controllers;
 
 use app\components\AuthHandler;
-use app\models\Auth;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
 use app\models\SignupForm;
-use app\models\User;
 use Yii;
 use yii\authclient\ClientInterface;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 
+/**
+ * SiteController
+ */
 class SiteController extends Controller
 {
     /**
@@ -79,6 +79,9 @@ class SiteController extends Controller
         (new AuthHandler($client))->handle();
     }
 
+    /**
+     * @return string
+     */
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -88,13 +91,15 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
+    /**
+     * @return \yii\web\Response
+     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -102,17 +107,23 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * @return string
+     */
     public function actionAbout()
     {
         return $this->render('about');
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionSignup()
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user, 3600 * 24 * 30)) {
+                if (Yii::$app->getUser()->login($user, Yii::$app->params['user.rememberMeDuration'])) {
                     return $this->goHome();
                 }
             }
@@ -123,6 +134,9 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -131,9 +145,8 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
 
                 return $this->goHome();
-            } else {
-                Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
             }
+            Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
         }
 
         return $this->render('requestPasswordResetToken', [
@@ -141,6 +154,11 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * @param string $token
+     * @return string|\yii\web\Response
+     * @throws BadRequestHttpException
+     */
     public function actionResetPassword($token)
     {
         try {

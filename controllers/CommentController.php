@@ -8,6 +8,9 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
+/**
+ * CommentController
+ */
 class CommentController extends Controller
 {
     /**
@@ -30,6 +33,9 @@ class CommentController extends Controller
         ];
     }
 
+    /**
+     * @return string
+     */
     public function actionIndex()
     {
         $query = Comment::find()->orderBy('id DESC');
@@ -43,6 +49,10 @@ class CommentController extends Controller
         ]);
     }
 
+    /**
+     * @param int $id
+     * @return \yii\web\Response
+     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
