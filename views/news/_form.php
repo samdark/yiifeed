@@ -14,10 +14,10 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin(['id' => 'news-form']) ?>
 
-<?= $form->field($model, 'title')->textInput(['maxlength' => 50]) ?>
+<?= $form->field($model, 'title')->textInput(['maxlength' => 250]) ?>
 <?= $form->field($model, 'text')->textarea() ?>
 
-<?= $form->field($model, 'link')->textInput(['maxlength' => 255]) ?>
+<?= $form->field($model, 'link')->textInput(['maxlength' => 250]) ?>
 <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>
 
     <div class="form-group">
