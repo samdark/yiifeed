@@ -8216,6 +8216,12 @@ h1.comment-count {
     font-size: 1.5rem;
     line-height: 1;
   }
+  .github-background {
+    display: none;
+  }
+  .site-login, .site-signup {
+    margin: 20px;
+  }
 }
 
 /*# sourceMappingURL=site.css.map */
