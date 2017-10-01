@@ -31,7 +31,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="row post">
-<div class="col-lg-2 col-md-3 info">
+<div class="col-lg-2 col-md-3 col-sm-3 info">
     <p class="time"><?= Yii::$app->formatter->asDate($model->created_at) ?></p>
     <?php if ($displayUser && $model->user_id): ?>
     <p class="author">
@@ -59,7 +59,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
         <?php endif ?>
     <?php endif ?>
 </div>
-<div class="col-lg-7 col-md-9 clearfix">
+<div class="col-lg-7 col-md-9 col-sm-9 clearfix">
     <h2><?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['news/view', 'id' => $model->id]) ?></h2>
     <div class="content">
     <?= HtmlPurifier::process(Markdown::process($model->text, 'gfm'), [

@@ -13,11 +13,17 @@ use yii\helpers\HtmlPurifier;
  */
 
 \app\assets\MarkdownEditorAsset::register($this);
+
+$commentCount = count($comments);
 ?>
 <div class="row">
-<div class="col-md-offset-2 col-md-7 col-xs-12">
+<div class="col-lg-offset-2 col-lg-7 col-md-offset-3 col-md-7 col-sm-offset-3 col-sm-9">
 
-<h1 style="font-weight:bold;font-size:19px;margin-bottom:30px;">Comments (<?= count($comments) ?>)</h1>
+<h1 class="comment-count">Comments (<?= $commentCount ?>)</h1>
+
+<?php if(!$commentCount): ?>
+<p>No comments yet.</p>
+<?php endif; ?>
 
 <ol class="comments">
     <?php foreach ($comments as $comment): ?>
@@ -40,6 +46,8 @@ use yii\helpers\HtmlPurifier;
 </ol>
 
 <?php if (!Yii::$app->user->isGuest): ?>
+
+    <hr>
 
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($commentForm, 'text')->label('Add new comment')->textarea() ?>
