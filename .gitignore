@@ -34,3 +34,6 @@ phpunit.phar
 
 # rbac items
 /rbac
+
+#node modules
+/node_modules

@@ -7,6 +7,7 @@
 
 namespace app\assets;
 
+use Yii;
 use yii\web\AssetBundle;
 
 /**
@@ -17,7 +18,10 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+
     public $css = [
+        'https://fonts.googleapis.com/css?family=Arimo:400,400i,700',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
         'css/prism.css',
         'css/site.css',
     ];
@@ -26,7 +30,15 @@ class AppAsset extends AssetBundle
         'js/site.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\web\YiiAsset'
     ];
+
+    public function init()
+    {
+        parent::init();
+        // resetting BootstrapAsset to not load own css files
+        Yii::$app->assetManager->bundles['yii\\bootstrap\\BootstrapAsset'] = [
+            'css' => []
+        ];
+    }
 }
