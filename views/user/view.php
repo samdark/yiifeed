@@ -15,26 +15,29 @@ use \yii\widgets\ListView;
 /* @var $this yii\web\View */
 
 ?>
-<div class="row user-view">
-    <div class="col-xs-12">
-        <div class="row">
-            <div class="col-sm-8 clearfix">
+
+<?php $this->beginBlock('header'); ?>
+<div class="header-title"> 
+    <div class="container">
+        <div class="row profile">
+            <div class="col-sm-2">
                 <div class="user-view-avatar">
                     <?= \app\widgets\Avatar::widget([
                         'user' => $model,
                         'size' => 165,
                     ]) ?>
                 </div>
-
-                <h1><?= Html::encode($this->title) ?></h1>
+            </div>
+            <div class="col-sm-10">
+            <h2><?= Html::encode($this->title) ?></h2>
                 <?php if ($model->getGithubProfileUrl() !== null): ?>
-                    <h3><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h3>
+                    <?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl(), ['class'=>'github-link'])?>
                 <?php endif ?>
 
                 <?php if (UserPermissions::canAdminUsers()): ?>
                     <p>
-                        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+                        <?= Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data' => [
                                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -43,20 +46,27 @@ use \yii\widgets\ListView;
                         ]) ?>
                     </p>
                 <?php endif ?>
-            </div>
-            <?php if (count($authClients) > 0): ?>
-            <div class="col-sm-4">
-                <div class="well well-sm">
-                    <h2>Connect extra profiles:</h2>
-                    <?= yii\authclient\widgets\AuthChoice::widget([
-                        'baseAuthUrl' => ['site/auth'],
-                        'popupMode' => false,
-                        'clients' => $authClients,
-                    ]) ?>
+
+                <!-- <?php if (count($authClients) > 0): ?>
+                <div class="col-sm-4">
+                    <div class="well well-sm">
+                        <h2>Connect extra profiles:</h2>
+                        <?= yii\authclient\widgets\AuthChoice::widget([
+                            'baseAuthUrl' => ['site/auth'],
+                            'popupMode' => false,
+                            'clients' => $authClients,
+                        ]) ?>
+                    </div>
                 </div>
+                <?php endif ?> -->
             </div>
-            <?php endif ?>
         </div>
+    </div>
+</div>
+<?php $this->endBlock(); ?>
+
+<div class="row user-view">
+    <div class="col-xs-12">
 
         <?= ListView::widget([
             'dataProvider' => $dataProvider,

@@ -9,9 +9,16 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('user', 'Users');
 ?>
-<div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?php $this->beginBlock('header'); ?>
+<div class="header-title"> 
+<div class="container">
+    <h4><?= $this->title ?></h4>
+</div>
+</div>
+<?php $this->endBlock(); ?>
+
+<div class="user-index">
 
     <?= GridView::widget(
         [
