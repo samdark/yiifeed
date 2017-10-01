@@ -1,0 +1,25 @@
+{
+  "name": "yiifeed",
+  "version": "1.0.0",
+  "description": "Yii Feed",
+  "author": "Nikola Trifunovic",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "node-sass": "^3.4.2",
+    "postcss-cli": "^2.5.1",
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix",
+    "build-autoprefix": "postcss --use autoprefixer --output scss/main.css web/css/site.css",
+    "build-clean": "rimraf css",
+    "build-sass": "node-sass --output-style expanded --source-map true scss/main.scss web/css/site.css",
+    "build-production": "node-sass --output-style compressed scss/main.scss web/css/site.min.css",
+    "watch": "npm run build-sass -- --watch",
+    "start": "npm run watch"
+  }
+}
