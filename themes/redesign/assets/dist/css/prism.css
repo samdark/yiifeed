@@ -76,7 +76,7 @@ pre[class*="language-"] {
 }
 
 .token.property {
-  color: #c08b30;
+  color: #3f9d8d;
 }
 
 .token.tag {
@@ -92,7 +92,7 @@ pre[class*="language-"] {
 }
 
 .token.attr-name {
-  color: #c76b29;
+  color: #e9443e;
 }
 
 .token.entity,
@@ -118,7 +118,7 @@ pre[class*="language-"] {
 
 .token.placeholder,
 .token.variable {
-  color: #3d8fd1;
+  color: #1d7aa2;
 }
 
 .token.deleted {
