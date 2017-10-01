@@ -13,31 +13,42 @@ use yii\helpers\HtmlPurifier;
  */
 
 \app\assets\MarkdownEditorAsset::register($this);
-?>
 
-<h2>Comments</h2>
+$commentCount = count($comments);
+?>
+<div class="row">
+<div class="col-lg-offset-2 col-lg-7 col-md-offset-3 col-md-7 col-sm-offset-3 col-sm-9">
+
+<h1 class="comment-count">Comments (<?= $commentCount ?>)</h1>
+
+<?php if(!$commentCount): ?>
+<p>No comments yet.</p>
+<?php endif; ?>
 
 <ol class="comments">
     <?php foreach ($comments as $comment): ?>
         <li id="c<?= $comment->id ?>" class="row">
-            <div class="col-xs-1 author">
-                <?= Html::a(Avatar::widget(['user' => $comment->user]) . ' ' . Html::encode($comment->user->username), ['user/view', 'id' => $comment->user->id]) ?>
+            <div class="col-md-3 col-xs-6 author">
+                <?= Html::a(Avatar::widget(['user' => $comment->user]) . ' <span class="user-handle">@' . Html::encode($comment->user->username) . '</span>', ['user/view', 'id' => $comment->user->id]) ?>
             </div>
-            <div class="col-xs-8 text well">
+            
+            <div class="col-md-9 col-xs-6">
+                <span class="date"><?= Yii::$app->formatter->asDate($comment->created_at) ?></span>
+            </div>
+            <div class="col-xs-12 text">
                 <?= HtmlPurifier::process(Markdown::process($comment->text, 'gfm-comment'), [
                     'HTML.SafeIframe' => true,
                     'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
                 ]) ?>
-            </div>
-            <div class="col-xs-3">
-                <a href="#c<?= $comment->id ?>">#<?= $comment->id ?></a>
-                <span class="date"><?= Yii::$app->formatter->format($comment->created_at, 'datetime') ?></span>
             </div>
         </li>
     <?php endforeach ?>
 </ol>
 
 <?php if (!Yii::$app->user->isGuest): ?>
+
+    <hr>
+
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($commentForm, 'text')->label('Add new comment')->textarea() ?>
 
@@ -46,5 +57,8 @@ use yii\helpers\HtmlPurifier;
     </div>
     <?php ActiveForm::end(); ?>
 <?php else: ?>
-    <p>Signup in order to comment.</p>
+    <p><b>Signup in order to comment.</b></p>
 <?php endif ?>
+
+</div>
+</div>

@@ -14,13 +14,13 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin(['id' => 'news-form']) ?>
 
-<?= $form->field($model, 'title')->textInput(['maxlength' => 250]) ?>
+<?= $form->field($model, 'title')->textInput(['maxlength' => 250, 'class' => 'form-control input-lg']) ?>
 <?= $form->field($model, 'text')->textarea() ?>
 
-<?= $form->field($model, 'link')->textInput(['maxlength' => 250]) ?>
+<?= $form->field($model, 'link')->textInput(['maxlength' => 250, 'class' => 'form-control input-lg']) ?>
 
 <?php if (\app\components\UserPermissions::canAdminNews()): ?>
-    <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses()) ?>
+    <?= $form->field($model, 'status')->dropDownList(\app\models\News::getStatuses(), ['class' => 'form-control input-lg']) ?>
 <?php endif ?>
 
     <div class="form-group">

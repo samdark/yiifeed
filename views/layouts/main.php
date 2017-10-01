@@ -5,31 +5,32 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\News;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-AppAsset::register($this);
+$bundle = AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="<?= Yii::$app->charset ?>"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?> - YiiFeed</title>
     <link rel="alternate" type="application/rss+xml" title="YiiFeed" href="<?= \yii\helpers\Url::to(['news/rss'], true)?>"/>
     <?php $this->head() ?>
 </head>
-<body>
 
+<body>
 <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
+
+<div class="wrap">
+
+<?php
             NavBar::begin([
                 'brandLabel' => '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> YiiFeed',
                 'brandUrl' => Yii::$app->homeUrl,
@@ -55,7 +56,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Comments', 'url' => ['/comment/index'], 'visible'=> \Yii::$app->user->can('adminNews')];
                 $menuItems[] = ['label' => 'News admin', 'url' => ['/news/admin', 'status' => News::STATUS_PROPOSED], 'visible'=> \Yii::$app->user->can('adminNews')];
                 $menuItems[] = ['label' => 'User admin', 'url' => ['/user/index'], 'visible'=> UserPermissions::canAdminUsers()];
-                $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/user/view', 'id' => \Yii::$app->user->id]];
+                $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/user/view', 'id' => \Yii::$app->user->id], 'options' => ['class'=>'bolded']];
                 $menuItems[] = [
                     'label' => 'Logout',
                     'url' => ['/site/logout'],
@@ -64,7 +65,7 @@ AppAsset::register($this);
             }
             ?>
 
-            <?= yii\helpers\Html::a(Yii::t('news', 'Suggest news'), ['news/suggest'], ['class' => 'btn btn-success navbar-btn']) ?>
+            <?= yii\helpers\Html::a(Yii::t('news', 'Suggest news'), ['news/suggest'], ['class' => 'btn btn-yellow navbar-btn']) ?>
 
             <?php
             echo Nav::widget([
@@ -74,16 +75,17 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </div>
-    </div>
-
-    <footer class="footer">
+    <?php if (isset($this->blocks['header'])): ?>
+        <?= $this->blocks['header'] ?>
+    <?php endif; ?>
+  
+  <div class="container">
+  <?= Alert::widget() ?>
+  <?= $content ?>
+  
+</div>
+</div>
+<footer>
         <div class="container">
             <p class="pull-left">
                 &copy; YiiFeed <?= date('Y') ?> |
@@ -92,10 +94,11 @@ AppAsset::register($this);
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
-
-    <?php GoogleAnalytics::track('UA-96093853-1') ?>
-
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+  
+  
+  <?php GoogleAnalytics::track('UA-96093853-1') ?>
+  
+  <?php $this->endBody() ?>
+  </body>
+  </html>
+  <?php $this->endPage() ?>
