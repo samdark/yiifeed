@@ -8,6 +8,10 @@ $config = [
   //  'language' => 'ru-RU',
     'defaultRoute' => 'news/index',
     'bootstrap' => ['log'],
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'components' => [
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
@@ -16,6 +20,15 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => require __DIR__ . '/key.php',
+        ],
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/redesign',
+                'baseUrl' => '@web/themes/redesign',
+                'pathMap' => [
+                    '@app/views' => '@app/themes/redesign',
+                ],
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

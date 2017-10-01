@@ -1,0 +1,27 @@
+{
+  "name": "yiifeed-redesign",
+  "version": "1.0.0",
+  "description": "Yii Feed Redesign",
+  "author": "Nikola Trifunovic",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "http-server": "^0.10.0",
+    "node-sass": "^3.4.2",
+    "postcss-cli": "^2.5.1",
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix",
+    "build-autoprefix": "postcss --use autoprefixer --output scss/main.css css/style.css",
+    "build-clean": "rimraf css",
+    "build-sass": "node-sass --output-style expanded --source-map true scss/main.scss css/style.css",
+    "build-production": "node-sass --output-style compressed scss/main.scss css/style.min.css",
+    "watch": "npm run build-sass -- --watch",
+    "server": "http-server . -o -s -p 9000",
+    "start": "npm run server | npm run watch"
+  }
+}
