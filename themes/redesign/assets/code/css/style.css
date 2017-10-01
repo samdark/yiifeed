@@ -8038,6 +8038,12 @@ footer {
   border-radius: 3px;
 }
 
+h1.comment-count {
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 30px;
+}
+
 .comments {
   padding: 0px;
   margin-bottom: 20px;
