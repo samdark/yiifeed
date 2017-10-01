@@ -7788,10 +7788,6 @@ button.close {
   }
 }
 
-body {
-  padding-top: 67px;
-}
-
 .btn-danger {
   box-shadow: 0 2px 0 0 #e62d27;
 }
@@ -7884,11 +7880,32 @@ body {
   border-radius: 100%;
 }
 
+.news-view {
+  margin-bottom: 30px;
+}
+
+body {
+  padding-top: 67px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -40px;
+  padding: 0 0 40px;
+}
+
 footer {
+  height: 40px;
   font-size: 13px;
-  height: 2rem;
-  display: block;
-  margin-bottom: 2rem;
+  border-top: 1px solid #ddd;
+  background: #fff;
+  padding-top: 10px;
 }
 
 .pagination li.active a {
@@ -8120,6 +8137,17 @@ h1.comment-count {
   font-size: 22px;
   font-weight: normal;
   margin-bottom: 20px;
+}
+
+.github-well h3 {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.github-well .text-muted {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 24px;
 }
 
 @media (max-width: 767px) {
