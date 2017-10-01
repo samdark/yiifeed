@@ -19,6 +19,7 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@app/themes/redesign/assets/dist';
     public $css = [
         'https://fonts.googleapis.com/css?family=Arimo:400,400i,700',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
         'css/prism.css',
         'css/style.css',
     ];

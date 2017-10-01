@@ -36,10 +36,6 @@ $btn-yellow-color: #333333;
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
-body {
-    padding-top: 67px;
-}
-
 // custom box shadow for buttons
 .btn-danger{
     box-shadow:0 2px 0 0 darken($brand-danger,15%);
@@ -132,12 +128,32 @@ body {
     }
 }
 
-// footer
-footer{
+.news-view{
+    margin-bottom: 30px; 
+}
+
+body{
+    padding-top: 67px; // because of navbar
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -40px;
+    padding: 0 0 40px;
+}
+
+footer {
+    height: 40px;
     font-size:13px;
-    height: 2rem;
-    display: block;
-    margin-bottom: 2rem;
+    border-top: 1px solid #ddd;
+    background: $white;
+    padding-top: 10px;
 }
 
 // pagination
@@ -385,6 +401,22 @@ h1.comment-count{
         font-size:22px;
         font-weight:normal;
         margin-bottom:20px;
+    }
+}
+
+// login and signup
+
+.github-well{
+
+    h3{
+        font-weight:bold;
+        font-size:18px;
+    }
+
+    .text-muted{
+        font-size:16px;
+        font-weight:bold;
+        margin-top:24px;
     }
 }
 

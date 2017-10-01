@@ -28,6 +28,8 @@ $bundle = AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<div class="wrap">
+
 <?php
             NavBar::begin([
                 'brandLabel' => '<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> YiiFeed',
@@ -82,10 +84,9 @@ $bundle = AppAsset::register($this);
   <?= $content ?>
   
 </div>
-
+</div>
 <footer>
         <div class="container">
-          <hr>
             <p class="pull-left">
                 &copy; YiiFeed <?= date('Y') ?> |
                 <?= Html::a('About', ['/site/about']) ?>

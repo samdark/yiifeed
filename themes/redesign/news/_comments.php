@@ -57,7 +57,7 @@ $commentCount = count($comments);
     </div>
     <?php ActiveForm::end(); ?>
 <?php else: ?>
-    <p>Signup in order to comment.</p>
+    <p><b>Signup in order to comment.</b></p>
 <?php endif ?>
 
 </div>
