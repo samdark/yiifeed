@@ -30,9 +30,8 @@ use \yii\widgets\ListView;
             </div>
             <div class="col-sm-10">
             <h2><?= Html::encode($this->title) ?></h2>
-            <?= Html::a('http://github.com/samdark', 'http://github.com/samdark', ['class'=>'github-link'])?>
                 <?php if ($model->getGithubProfileUrl() !== null): ?>
-                    <h3><?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl())?></h3>
+                    <?= Html::a(Html::encode($model->getGithubProfileUrl()), $model->getGithubProfileUrl(), ['class'=>'github-link'])?>
                 <?php endif ?>
 
                 <?php if (UserPermissions::canAdminUsers()): ?>
