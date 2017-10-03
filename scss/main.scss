@@ -28,13 +28,22 @@ $navbar-inverse-link-color: $white;
 $brand-yellow: #f5ffc1;
 $btn-yellow-color: #333333;
 
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss";
+$brand-twitter: #0091e6;
+$brand-facebook: #3d56ab;
+
+@import "node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
 .btn-yellow {
     @include button-variant($btn-yellow-color, $brand-yellow, $brand-yellow);
 }
 
-@import "node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+.btn-twitter {
+    @include button-variant($white, $brand-twitter, $brand-twitter);
+}
+
+.btn-facebook {
+    @include button-variant($white, $brand-facebook, $brand-facebook);
+}
 
 // custom box shadow for buttons
 .btn-danger{
@@ -57,7 +66,6 @@ $btn-yellow-color: #333333;
     padding: 20px 0;
     background:#f6f6f6;
     margin-bottom: 32px;
-
     h4 {
         font-family:Arimo;
         font-size:22px;
@@ -65,7 +73,6 @@ $btn-yellow-color: #333333;
         color:#333333;
         font-weight: bold;
     }
-
     .breadcrumb{
         margin: 0;
         padding: 0;
@@ -92,19 +99,16 @@ $btn-yellow-color: #333333;
 // posts
 .post{
     margin-bottom: 44px;
-
     h2{
         color:#1d7aa2;
         font-size: 22px;
         font-weight: bold;
         margin: 0 0 2rem 0;
     }
-    
     .read-more{
         font-size:14px;
         color:#1d7aa2;
     }
-
     .info{
         .time{
             font-family:Arimo;
@@ -164,12 +168,10 @@ footer {
             font-weight: bold;
         }
     }
-
     span{
         margin: 0 5px 0 0;
         border-radius: 3px !important;
     }
-
     a{
         font-size: 13px;
         margin-right: 5px;
@@ -189,7 +191,6 @@ footer {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 6px;
-
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
@@ -198,6 +199,7 @@ footer {
     margin-bottom: 0.4em;
     button {
         margin-right: 0.4em;
+        padding: 6px 11px;
         font-size: 10px;
         font-weight:bold;
     }
@@ -223,46 +225,41 @@ footer {
     font-size:15px;
     border-bottom:1px solid #DDD;
     margin-bottom: 38px;
-
-  > li > a:focus, 
-  > li > a:hover {
-    background: transparent;
-    outline: 0;
-  }
-  
-  >li.active>a,
-  >li.active>a:focus, 
-  >li.active>a:hover,
-  >li.active>a:active {
-    background: transparent;
-    color: #333;
-    font-weight: bold;
-    cursor: default;
-    border: 0;
-  }
-  
-  >li>a {
-    position: relative;
-    color: #444;
-    border: 0px;
-    padding: 13px 15px 13px 15px;
-  }
-  
-  >li >a:hover {
-    color: #393939;
-    background: transparent;
-  }
-  
-  >li.active>a:after {
-    display: block;
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;    
-    width: 100%;
-    height: 4px;
-    background: #1d7aa2;
-  }
+    > li > a:focus, 
+    > li > a:hover {
+        background: transparent;
+        outline: 0;
+    }
+    >li.active>a,
+    >li.active>a:focus, 
+    >li.active>a:hover,
+    >li.active>a:active {
+        background: transparent;
+        color: #333;
+        font-weight: bold;
+        cursor: default;
+        border: 0;
+    }
+    >li>a {
+        position: relative;
+        color: #444;
+        border: 0px;
+        padding: 13px 15px 13px 15px;
+    }
+    >li >a:hover {
+        color: #393939;
+        background: transparent;
+    }
+    >li.active>a:after {
+        display: block;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;    
+        width: 100%;
+        height: 4px;
+        background: #1d7aa2;
+    }
 }
 
 // users table
@@ -319,7 +316,6 @@ footer {
 }
 
 // comments on news
-
 h1.comment-count{
     font-weight:bold;
     font-size:19px;
@@ -332,7 +328,6 @@ h1.comment-count{
     li {
         list-style: none;
         margin-bottom: 20px;
-
         .author{
             font-size: 13px;
             img{
@@ -342,12 +337,10 @@ h1.comment-count{
                 margin-right: 10px;
             }
         }
-
         .date{
             font-size: 12px;
             color:$gray-light;
         }
-
         .text{
             margin-top: 20px;
         }
@@ -405,16 +398,13 @@ h1.comment-count{
 }
 
 // login and signup
-
 .site-login, .site-signup{
     margin-top:40px;
-    
     h2{
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: bold;
     }
-
     .breadcrumb{
         background:none;
         padding-left:0;
@@ -441,12 +431,10 @@ h1.comment-count{
 
 .github-side{
     margin-top: 40px;
-
     h3{
         font-weight:bold;
         font-size:18px;
     }
-
     .text-muted{
         font-size:16px;
         font-weight:bold;
@@ -456,32 +444,82 @@ h1.comment-count{
 
 // Mobile optimizations
 @media (max-width: 767px) {
-    .post{
+    .navbar{
+        .navbar-btn{
+            width: 100%;
+        }
+        .navbar-form{
+            margin:0;
+        }
+        .navbar-nav{
+            margin-top:0px;
+        }
+    }
+    .news-index{
         .info{
             min-height: 48px;
             margin-bottom: 20px;
-
             .time{
                 float: right;
                 padding-top: 10px;
             }
-
             .status{
                 font-size:12px;
                 color:$gray-light;
             }
-            
             .author{
                 float: left;
                 margin-right: 20px;
             }
-        
+            .twitter-handle{
+                padding-top: 10px;
+            }
+        }
+        .comment{
+            padding-bottom:20px;
+            display: table;
+            margin: 0px;
+            width: 100%;
+
+            .info{
+                display: table-header-group;
+            }
+            
+            .details{
+                display: table-row-group;
+                margin:0 10px;
+            }
+
+            .text{
+                margin-top:20px;
+                display: table-footer-group;
+            }
+            
+            
+        }
+    }
+    
+    .post{
+        .info{
+            min-height: 48px;
+            margin-bottom: 20px;
+            .time{
+                float: right;
+                padding-top: 10px;
+            }
+            .status{
+                font-size:12px;
+                color:$gray-light;
+            }
+            .author{
+                float: left;
+                margin-right: 20px;
+            }
             .twitter-handle{
                 padding-top: 10px;
             }
         }
     }
-
     .center-pagination{
         text-align: center;
         .pagination{
@@ -492,11 +530,40 @@ h1.comment-count{
             }
         }
     }
-
     .github-background{
         display: none;
     }
     .site-login, .site-signup{
         margin: 20px;
+    }
+    footer{
+        p{
+            width: 100%;
+            float: initial !important;
+            text-align: center;
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+    .comment{
+        padding-bottom:20px;
+        display: table;
+        margin: 0px;
+        width: 100%;
+
+        .info{
+            display: table-header-group;
+        }
+        
+        .details{
+            display: table-row-group;
+            margin:0 10px;
+        }
+        .text{
+            margin-top:20px;
+            display: table-footer-group;
+        }
     }
 }

@@ -1,56 +1,4 @@
 @charset "UTF-8";
-.btn-yellow {
-  color: #333333;
-  background-color: #f5ffc1;
-  border-color: #f5ffc1;
-}
-
-.btn-yellow:focus, .btn-yellow.focus {
-  color: #333333;
-  background-color: #edff8e;
-  border-color: #e0ff42;
-}
-
-.btn-yellow:hover {
-  color: #333333;
-  background-color: #edff8e;
-  border-color: #ebff84;
-}
-
-.btn-yellow:active, .btn-yellow.active,
-.open > .btn-yellow.dropdown-toggle {
-  color: #333333;
-  background-color: #edff8e;
-  border-color: #ebff84;
-}
-
-.btn-yellow:active:hover, .btn-yellow:active:focus, .btn-yellow:active.focus, .btn-yellow.active:hover, .btn-yellow.active:focus, .btn-yellow.active.focus,
-.open > .btn-yellow.dropdown-toggle:hover,
-.open > .btn-yellow.dropdown-toggle:focus,
-.open > .btn-yellow.dropdown-toggle.focus {
-  color: #333333;
-  background-color: #e7ff6a;
-  border-color: #e0ff42;
-}
-
-.btn-yellow:active, .btn-yellow.active,
-.open > .btn-yellow.dropdown-toggle {
-  background-image: none;
-}
-
-.btn-yellow.disabled:hover, .btn-yellow.disabled:focus, .btn-yellow.disabled.focus, .btn-yellow[disabled]:hover, .btn-yellow[disabled]:focus, .btn-yellow[disabled].focus,
-fieldset[disabled] .btn-yellow:hover,
-fieldset[disabled] .btn-yellow:focus,
-fieldset[disabled] .btn-yellow.focus {
-  background-color: #f5ffc1;
-  border-color: #f5ffc1;
-}
-
-.btn-yellow .badge {
-  color: #f5ffc1;
-  background-color: #333333;
-}
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -7788,6 +7736,162 @@ button.close {
   }
 }
 
+.btn-yellow {
+  color: #333333;
+  background-color: #f5ffc1;
+  border-color: #f5ffc1;
+}
+
+.btn-yellow:focus, .btn-yellow.focus {
+  color: #333333;
+  background-color: #edff8e;
+  border-color: #e0ff42;
+}
+
+.btn-yellow:hover {
+  color: #333333;
+  background-color: #edff8e;
+  border-color: #ebff84;
+}
+
+.btn-yellow:active, .btn-yellow.active,
+.open > .btn-yellow.dropdown-toggle {
+  color: #333333;
+  background-color: #edff8e;
+  border-color: #ebff84;
+}
+
+.btn-yellow:active:hover, .btn-yellow:active:focus, .btn-yellow:active.focus, .btn-yellow.active:hover, .btn-yellow.active:focus, .btn-yellow.active.focus,
+.open > .btn-yellow.dropdown-toggle:hover,
+.open > .btn-yellow.dropdown-toggle:focus,
+.open > .btn-yellow.dropdown-toggle.focus {
+  color: #333333;
+  background-color: #e7ff6a;
+  border-color: #e0ff42;
+}
+
+.btn-yellow:active, .btn-yellow.active,
+.open > .btn-yellow.dropdown-toggle {
+  background-image: none;
+}
+
+.btn-yellow.disabled:hover, .btn-yellow.disabled:focus, .btn-yellow.disabled.focus, .btn-yellow[disabled]:hover, .btn-yellow[disabled]:focus, .btn-yellow[disabled].focus,
+fieldset[disabled] .btn-yellow:hover,
+fieldset[disabled] .btn-yellow:focus,
+fieldset[disabled] .btn-yellow.focus {
+  background-color: #f5ffc1;
+  border-color: #f5ffc1;
+}
+
+.btn-yellow .badge {
+  color: #f5ffc1;
+  background-color: #333333;
+}
+
+.btn-twitter {
+  color: #fff;
+  background-color: #0091e6;
+  border-color: #0091e6;
+}
+
+.btn-twitter:focus, .btn-twitter.focus {
+  color: #fff;
+  background-color: #0071b3;
+  border-color: #004167;
+}
+
+.btn-twitter:hover {
+  color: #fff;
+  background-color: #0071b3;
+  border-color: #006aa9;
+}
+
+.btn-twitter:active, .btn-twitter.active,
+.open > .btn-twitter.dropdown-toggle {
+  color: #fff;
+  background-color: #0071b3;
+  border-color: #006aa9;
+}
+
+.btn-twitter:active:hover, .btn-twitter:active:focus, .btn-twitter:active.focus, .btn-twitter.active:hover, .btn-twitter.active:focus, .btn-twitter.active.focus,
+.open > .btn-twitter.dropdown-toggle:hover,
+.open > .btn-twitter.dropdown-toggle:focus,
+.open > .btn-twitter.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #005a8f;
+  border-color: #004167;
+}
+
+.btn-twitter:active, .btn-twitter.active,
+.open > .btn-twitter.dropdown-toggle {
+  background-image: none;
+}
+
+.btn-twitter.disabled:hover, .btn-twitter.disabled:focus, .btn-twitter.disabled.focus, .btn-twitter[disabled]:hover, .btn-twitter[disabled]:focus, .btn-twitter[disabled].focus,
+fieldset[disabled] .btn-twitter:hover,
+fieldset[disabled] .btn-twitter:focus,
+fieldset[disabled] .btn-twitter.focus {
+  background-color: #0091e6;
+  border-color: #0091e6;
+}
+
+.btn-twitter .badge {
+  color: #0091e6;
+  background-color: #fff;
+}
+
+.btn-facebook {
+  color: #fff;
+  background-color: #3d56ab;
+  border-color: #3d56ab;
+}
+
+.btn-facebook:focus, .btn-facebook.focus {
+  color: #fff;
+  background-color: #304385;
+  border-color: #1b274d;
+}
+
+.btn-facebook:hover {
+  color: #fff;
+  background-color: #304385;
+  border-color: #2d3f7e;
+}
+
+.btn-facebook:active, .btn-facebook.active,
+.open > .btn-facebook.dropdown-toggle {
+  color: #fff;
+  background-color: #304385;
+  border-color: #2d3f7e;
+}
+
+.btn-facebook:active:hover, .btn-facebook:active:focus, .btn-facebook:active.focus, .btn-facebook.active:hover, .btn-facebook.active:focus, .btn-facebook.active.focus,
+.open > .btn-facebook.dropdown-toggle:hover,
+.open > .btn-facebook.dropdown-toggle:focus,
+.open > .btn-facebook.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #26366b;
+  border-color: #1b274d;
+}
+
+.btn-facebook:active, .btn-facebook.active,
+.open > .btn-facebook.dropdown-toggle {
+  background-image: none;
+}
+
+.btn-facebook.disabled:hover, .btn-facebook.disabled:focus, .btn-facebook.disabled.focus, .btn-facebook[disabled]:hover, .btn-facebook[disabled]:focus, .btn-facebook[disabled].focus,
+fieldset[disabled] .btn-facebook:hover,
+fieldset[disabled] .btn-facebook:focus,
+fieldset[disabled] .btn-facebook.focus {
+  background-color: #3d56ab;
+  border-color: #3d56ab;
+}
+
+.btn-facebook .badge {
+  color: #3d56ab;
+  background-color: #fff;
+}
+
 .btn-danger {
   box-shadow: 0 2px 0 0 #e62d27;
 }
@@ -7946,6 +8050,7 @@ footer {
 
 .CodeMirror-buttonsPanel button {
   margin-right: 0.4em;
+  padding: 6px 11px;
   font-size: 10px;
   font-weight: bold;
 }
@@ -8189,6 +8294,51 @@ h1.comment-count {
 }
 
 @media (max-width: 767px) {
+  .navbar .navbar-btn {
+    width: 100%;
+  }
+  .navbar .navbar-form {
+    margin: 0;
+  }
+  .navbar .navbar-nav {
+    margin-top: 0px;
+  }
+  .news-index .info {
+    min-height: 48px;
+    margin-bottom: 20px;
+  }
+  .news-index .info .time {
+    float: right;
+    padding-top: 10px;
+  }
+  .news-index .info .status {
+    font-size: 12px;
+    color: #777;
+  }
+  .news-index .info .author {
+    float: left;
+    margin-right: 20px;
+  }
+  .news-index .info .twitter-handle {
+    padding-top: 10px;
+  }
+  .news-index .comment {
+    padding-bottom: 20px;
+    display: table;
+    margin: 0px;
+    width: 100%;
+  }
+  .news-index .comment .info {
+    display: table-header-group;
+  }
+  .news-index .comment .details {
+    display: table-row-group;
+    margin: 0 10px;
+  }
+  .news-index .comment .text {
+    margin-top: 20px;
+    display: table-footer-group;
+  }
   .post .info {
     min-height: 48px;
     margin-bottom: 20px;
@@ -8221,6 +8371,31 @@ h1.comment-count {
   }
   .site-login, .site-signup {
     margin: 20px;
+  }
+  footer p {
+    width: 100%;
+    float: initial !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .comment {
+    padding-bottom: 20px;
+    display: table;
+    margin: 0px;
+    width: 100%;
+  }
+  .comment .info {
+    display: table-header-group;
+  }
+  .comment .details {
+    display: table-row-group;
+    margin: 0 10px;
+  }
+  .comment .text {
+    margin-top: 20px;
+    display: table-footer-group;
   }
 }
 

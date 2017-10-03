@@ -73,10 +73,13 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
             <p><?= Html::a(Html::encode($model->link), $model->link) ?></p>
         <?php endif ?>
 
-        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-hashtags="yii" data-url="<?= Url::canonical() ?>" data-text="<?= Html::encode($model->title) ?>">Tweet</a>
+        <a href="http://twitter.com/intent/tweet?status=[TITLE]+<?= Url::canonical() ?>+\#yii" class="btn btn-sm btn-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</a>
+        <a href="http://www.facebook.com/sharer/sharer.php?u=[URL]&title=[TITLE]" class="btn btn-sm btn-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
+
+        <!-- <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-hashtags="yii" data-url="<?= Url::canonical() ?>" data-text="<?= Html::encode($model->title) ?>">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-        <div class="fb-share-button" data-href="<?= Url::canonical() ?>" data-layout="button"></div>
+        <div class="fb-share-button" data-href="<?= Url::canonical() ?>" data-layout="button"></div> -->
     </div>
     <?php endif ?>
 </div>
