@@ -80,8 +80,8 @@ $bundle = AppAsset::register($this);
     <?php endif; ?>
   
   <div class="container">
-  <?= Alert::widget() ?>
-  <?= $content ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
   
 </div>
 </div>
