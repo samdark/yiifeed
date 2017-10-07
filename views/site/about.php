@@ -28,7 +28,12 @@ $this->title = 'About YiiFeed';
 <div class="col-lg-6">
     <h2>Team</h2>
     <p>Initially the project was created by <a href="https://github.com/samdark">Alexander Makarov</a>
-        and <a href="https://github.com/tsvadim">Cvigun Vadim</a>. Currently maintained and hosted by Alexander.
+        and <a href="https://github.com/tsvadim">Cvigun Vadim</a>.</p>
+
+    <p>In 2017 new design was proposed by <a href="mailto:design@annabezborodova.com">Anna Bezborodova</a>
+    and implemented by <a href="https://github.com/johonunu">Nikola Trifunović</a>.</p>
+
+    <p>Currently YiiFeed is maintained and hosted by Alexander.
         You can check <a href="https://github.com/samdark/yiifeed/graphs/contributors">all contributors at GitHub</a>.</p>
         <p style="font-size:14px;">Alexander is currently <a href="https://www.patreon.com/samdark">seeking for patronage</a> to work on
             OpenSource fulltime so if you like this project and Yii in general,
