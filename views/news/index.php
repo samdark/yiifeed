@@ -7,6 +7,15 @@ use yii\bootstrap\Alert;
 /* @var $this yii\web\View */
 $this->title = Yii::t('news','News');
 ?>
+
+<?php $this->beginBlock('header'); ?>
+<div class="header-title"> 
+<div class="container">
+    <h4><?= $this->title ?></h4>
+</div>
+</div>
+<?php $this->endBlock(); ?>
+
 <div class="row news-index">
     <?php if (Yii::$app->session->hasFlash('news.news_successfully_added')) {
         echo Alert::widget([

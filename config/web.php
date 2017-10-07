@@ -8,6 +8,10 @@ $config = [
   //  'language' => 'ru-RU',
     'defaultRoute' => 'news/index',
     'bootstrap' => ['log'],
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'components' => [
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',

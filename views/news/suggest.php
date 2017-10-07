@@ -12,12 +12,20 @@ use yii\widgets\ActiveForm;
 \app\assets\MarkdownEditorAsset::register($this);
 ?>
 
+<?php $this->beginBlock('header'); ?>
+<div class="header-title"> 
+<div class="container">
+    <h4>Suggest news</h4>
+</div>
+</div>
+<?php $this->endBlock(); ?>
+
 <div class="news-add">
 
     <?php $form = ActiveForm::begin(['id' => 'news-add']) ?>
-    <?= $form->field($model, 'link') ?>
+    <?= $form->field($model, 'link')->textInput(['maxlength' => 250, 'class' => 'form-control input-lg']) ?>
 
-    <?= $form->field($model, 'title') ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 250, 'class' => 'form-control input-lg']) ?>
 
     <?= $form->field($model, 'text')->textarea() ?>
 

@@ -9,9 +9,16 @@ $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'User',
 ]) . ' ' . $model->username;
 ?>
-<div class="user-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?php $this->beginBlock('header'); ?>
+<div class="header-title"> 
+<div class="container">
+    <h4><?= $this->title ?></h4>
+</div>
+</div>
+<?php $this->endBlock(); ?>
+
+<div class="user-update">
 
     <?= $this->render('_form', [
         'model' => $model,

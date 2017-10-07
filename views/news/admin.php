@@ -9,7 +9,7 @@ $this->title = Yii::t('news', 'News admin');
 <div class="row news-index">
     <div class="col-xs-12">
         <?= \yii\bootstrap\Nav::widget([
-            'options' => ['class' => 'nav-pills'],
+            'options' => ['class' => 'nav nav-tabs material-tabs'],
             'items' => [
             [
                 'label' => News::statusLabel(News::STATUS_PROPOSED),
