@@ -47,7 +47,7 @@ use \yii\widgets\ListView;
                     </p>
                 <?php endif ?>
 
-                <!-- <?php if (count($authClients) > 0): ?>
+                <?php /** if (count($authClients) > 0): ?>
                 <div class="col-sm-4">
                     <div class="well well-sm">
                         <h2>Connect extra profiles:</h2>
@@ -58,7 +58,7 @@ use \yii\widgets\ListView;
                         ]) ?>
                     </div>
                 </div>
-                <?php endif ?> -->
+                <?php endif  */ ?>
             </div>
         </div>
     </div>
