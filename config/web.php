@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'yiifeed',
+    'name' => 'YiiFeed',
     'basePath' => dirname(__DIR__),
   //  'language' => 'ru-RU',
     'defaultRoute' => 'news/index',
