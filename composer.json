@@ -11,7 +11,7 @@
         "yiisoft/yii2": "~2.0.9",
         "yiisoft/yii2-bootstrap": "~2.0.6",
         "yiisoft/yii2-swiftmailer": "~2.0.5",
-        "yiisoft/yii2-authclient": "~2.0.5",
+        "yiisoft/yii2-authclient": "~2.1.1",
         "cebe/yii2-gravatar": "~1.1",
         "baibaratsky/yii2-rollbar": "1.2.*",
         "bower-asset/codemirror": "~5.9.0",
@@ -22,7 +22,13 @@
         "yiisoft/yii2-gii": "~2.0.5"
     },
     "config": {
-        "process-timeout": 1800
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "installer-paths": {
+                "npm-asset-library": "vendor/npm-asset",
+                "bower-asset-library": "vendor/bower-asset"
+            }
+        }
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -41,10 +47,6 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm-asset",
-            "bower-asset-library": "vendor/bower-asset"
         }
     },
     "repositories": [
