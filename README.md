@@ -74,3 +74,9 @@ yii rbac/assign moderator boris
 ```
 
 Will assign admin role to user with username=alex and moderator role to user with username=boris.
+
+### 5. Cron
+
+```
+*/10 * * * * php yii queue/run > /dev/null 2>&1
+```

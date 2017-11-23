@@ -1,6 +1,9 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
+$params = array_merge(
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
+);
 
 $config = [
     'id' => 'yiifeed',
@@ -49,6 +52,7 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'mutex' => \yii\mutex\MysqlMutex::class,
         'i18n' => [
             'translations' => [
                 '*' => [
@@ -65,11 +69,8 @@ $config = [
             'class' => 'yii\authclient\Collection',
             'clients' => require __DIR__ . '/authclients.php',
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'rules' => require __DIR__ . '/urls.php',
-            'showScriptName' => false,
-        ],
+        'urlManager' => $params['components.urlManager'],
+        'queue' => $params['components.queue'],
     ],
     'params' => $params,
     'on beforeRequest' => function () {

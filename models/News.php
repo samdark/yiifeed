@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\queue\NewsShareJob;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -18,6 +19,7 @@ use yii\behaviors\BlameableBehavior;
  * @property integer $status
  * @property integer $created_at
  * @property integer $user_id
+ * @property bool $published_to_twitter
  *
  * @property User $user
  * @property Comment[] $comments
@@ -85,6 +87,7 @@ class News extends ActiveRecord
             ['title', 'string', 'max' => 250],
             ['link', 'string', 'max' => 250],
             ['link', 'url', 'skipOnEmpty' => true],
+            ['published_to_twitter', 'boolean'],
         ];
     }
 
@@ -166,4 +169,35 @@ class News extends ActiveRecord
         }
         return true;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if (array_key_exists('status', $changedAttributes) && $changedAttributes['status'] != $this->status && (int) $this->status === self::STATUS_PUBLISHED) {
+            $this->addShareJob();
+        }
+    }
+
+    /**
+     * Add a task to share news.
+     *
+     * @return bool
+     */
+    public function addShareJob()
+    {
+        if ((int) $this->status === self::STATUS_PUBLISHED && !$this->published_to_twitter) {
+            Yii::$app->queue->push(new NewsShareJob([
+                'newsId' => $this->id
+            ]));
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
 }
