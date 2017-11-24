@@ -31,6 +31,7 @@ phpunit.phar
 /config/db.php
 /config/authclients.php
 /config/rollbar.php
+/config/params-local.php
 
 # rbac items
 /rbac

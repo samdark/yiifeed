@@ -15,7 +15,9 @@
         "cebe/yii2-gravatar": "~1.1",
         "baibaratsky/yii2-rollbar": "1.2.*",
         "bower-asset/codemirror": "~5.9.0",
-        "bower-asset/codemirror-buttons": "~1.0.0"
+        "bower-asset/codemirror-buttons": "~1.0.0",
+        "yiisoft/yii2-queue": "~2.0.0",
+        "abraham/twitteroauth": "~0.7.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.6",
