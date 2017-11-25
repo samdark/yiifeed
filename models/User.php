@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $updated_at
  * @property string $password write-only password
  * @property string $github
+ * @property string $access_token
  *
  * @property Auth[] $auths
  */
@@ -57,6 +58,11 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             ['status', 'filter', 'filter' => 'intval'],
+            
+            ['access_token', 'string', 'length' => 64],
+            ['access_token', 'default'],
+            ['access_token', 'unique'],
+            
         ];
     }
 
@@ -73,7 +79,12 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        $token = (string) $token;
+        if ($token !== '') {
+            return static::find()->andWhere(['access_token' => $token])->active()->one();
+        }
+        
+        return null;
     }
 
     /**
@@ -174,6 +185,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
+    
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString(64);
+    }
 
     /**
      * Generates new password reset token
@@ -230,5 +246,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function getGithubProfileUrl()
     {
         return $this->github ? 'http://github.com/' . $this->github : null;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
     }
 }

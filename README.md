@@ -27,6 +27,8 @@ REQUIREMENTS
 The minimum requirement by this application that your Web server supports PHP 5.4.0.
 
 
+[API docs](modules/api/docs/index.md).
+
 INSTALLATION
 ------------
 

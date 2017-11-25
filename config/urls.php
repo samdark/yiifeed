@@ -1,4 +1,5 @@
 <?php
+
 return [
     'news' => 'news/view',
     'user' => 'user/view',
@@ -8,4 +9,16 @@ return [
     'login' => 'site/login',
     'signup' => 'site/signup',
     'auth' => 'site/auth',
+    
+    'api/v1/profile' => 'api/v1/default/profile',
+    [
+        'class' => \yii\rest\UrlRule::class,
+        'controller' => 'api/v1/news',
+        'only' => ['index', 'view'],
+    ],
+    [
+        'class' => \yii\rest\UrlRule::class,
+        'controller' => 'api/v1/user',
+        'only' => ['index', 'view'],
+    ],
 ];

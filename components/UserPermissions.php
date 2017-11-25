@@ -81,20 +81,19 @@ class UserPermissions
         if (\Yii::$app->user->isGuest) {
             return false;
         }
-
-        $currentUserID = \Yii::$app->user->getId();
-
-        if ((int)$user->id === $currentUserID) {
+        
+        if (self::canAdminUsers()) {
             return true;
         }
 
-        if (self::canAdminUsers()) {
+        $currentUserID = \Yii::$app->user->getId();
+        if ((int) $user->id === $currentUserID && (int) $user->status === User::STATUS_ACTIVE) {
             return true;
         }
 
         return false;
     }
-
+    
     /**
      * @param Comment $comment
      *

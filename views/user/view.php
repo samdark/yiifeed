@@ -47,6 +47,11 @@ use \yii\widgets\ListView;
                     </p>
                 <?php endif ?>
 
+                <p><?= Html::a(Yii::t('user', 'Generate new access token for API'), ['user/generate-access-token'], [
+                    'class' => 'btn btn-default',
+                    'data-method' => 'post',
+                ]) ?></p>
+                
                 <?php /** if (count($authClients) > 0): ?>
                 <div class="col-sm-4">
                     <div class="well well-sm">

@@ -72,6 +72,11 @@ $config = [
         'urlManager' => $params['components.urlManager'],
         'queue' => $params['components.queue'],
     ],
+    'modules' => [
+        'api' => [
+            'class' => \app\modules\api\Module::class,
+        ],
+    ],
     'params' => $params,
     'on beforeRequest' => function () {
         $pathInfo = Yii::$app->request->pathInfo;
