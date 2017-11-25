@@ -89,6 +89,7 @@ $bundle = AppAsset::register($this);
         <div class="container">
             <p class="pull-left">
                 &copy; YiiFeed <?= date('Y') ?> |
+                <?= Html::a('Twitter', 'https://twitter.com/yiifeed') ?> |
                 <?= Html::a('About', ['/site/about']) ?>
             </p>
             <p class="pull-right"><?= Yii::powered() ?></p>
