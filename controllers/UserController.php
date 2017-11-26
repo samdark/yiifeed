@@ -165,7 +165,9 @@ class UserController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         
+        $user->scenario = User::SCENARIO_ACCESS_TOKEN;
         $user->generateAccessToken();
+        
         if ($user->save()) {
             Yii::$app->session->setFlash('info', Yii::t('user', 'Make sure to copy your new personal access token now. You won\'t be able to see it again!'));
             Yii::$app->session->setFlash('success', Yii::t('user', 'Access token: {accessToken}', ['accessToken' => "<b>{$user->access_token}</b>"]));

@@ -28,6 +28,8 @@ use yii\helpers\ArrayHelper;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    const SCENARIO_ACCESS_TOKEN = 'accessToken';
+    
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
@@ -62,8 +64,20 @@ class User extends ActiveRecord implements IdentityInterface
             ['access_token', 'string', 'length' => 64],
             ['access_token', 'default'],
             ['access_token', 'unique'],
-            
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        
+        ArrayHelper::removeValue($scenarios[self::SCENARIO_DEFAULT], 'access_token');
+        $scenarios[self::SCENARIO_ACCESS_TOKEN] = ['access_token'];
+        
+        return $scenarios;
     }
 
     /**
