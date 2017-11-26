@@ -82,12 +82,11 @@ class UserPermissions
             return false;
         }
         
-        if (self::canAdminUsers()) {
+        if ((int) $user->id === (int) \Yii::$app->user->getId() && (int) $user->status === User::STATUS_ACTIVE) {
             return true;
         }
-
-        $currentUserID = \Yii::$app->user->getId();
-        if ((int) $user->id === $currentUserID && (int) $user->status === User::STATUS_ACTIVE) {
+        
+        if (self::canAdminUsers()) {
             return true;
         }
 
