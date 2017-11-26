@@ -38,10 +38,14 @@ class DefaultController extends BaseController
     {
         return [
             'version' => Module::VERSION,
-            'urls' => [
-                'docs' => Url::to(['/api/docs'], true),
-                'news' => Url::to(['news/index'], true),
-                'users' => Url::to(['user/index'], true),
+            'docsUrl' => Url::to(['/api/docs'], true),
+            '_links' => [
+                'news' => [
+                    'href' => Url::to(['news/index'], true),
+                ],
+                'users' => [
+                    'href' => Url::to(['user/index'], true),
+                ],
             ],
         ];
     }
