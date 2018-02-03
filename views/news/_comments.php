@@ -1,5 +1,6 @@
 <?php
 
+use app\components\UserPermissions;
 use app\widgets\Avatar;
 use yii\helpers\Markdown;
 use yii\widgets\ActiveForm;
@@ -32,9 +33,22 @@ $commentCount = count($comments);
                 <?= Html::a(Avatar::widget(['user' => $comment->user]) . ' <span class="user-handle">@' . Html::encode($comment->user->username) . '</span>', ['user/view', 'id' => $comment->user->id]) ?>
             </div>
             
-            <div class="col-md-9 col-xs-6">
+            <div class="col-md-8 col-xs-4">
                 <span class="date"><?= Yii::$app->formatter->asDate($comment->created_at) ?></span>
             </div>
+            
+            <?php if (UserPermissions::canManageComment($comment)): ?>
+                <div class="col-md-1 col-xs-2">
+                    <?= Html::a(
+                        '<i class="fa fa-remove"></i> ' . Yii::t('comment', 'Delete'),
+                        ['/comment/delete', 'id' => $comment->id], [
+                        'data-method' => 'post',
+                        'data-confirm' => Yii::t('comment', 'Are you sure you want to delete this comment?'),
+                        'class' => 'btn btn-danger'
+                    ]) ?>
+                </div>
+            <?php endif ?>
+            
             <div class="col-xs-12 text">
                 <?= HtmlPurifier::process(Markdown::process($comment->text, 'gfm-comment'), [
                     'HTML.SafeIframe' => true,
