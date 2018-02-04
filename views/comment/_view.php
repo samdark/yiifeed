@@ -29,13 +29,13 @@ use yii\helpers\Markdown;
             </div>
         </div>
         <div class="col-md-3 col-sm-3">
-        <?= Html::a(Yii::t('comments', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('comments', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+            <?= Html::a(
+                '<i class="fa fa-remove"></i> ' . Yii::t('comment', 'Delete'),
+                ['/comment/delete', 'id' => $model->id], [
+                'data-method' => 'post',
+                'data-confirm' => Yii::t('comment', 'Are you sure you want to delete this comment?'),
+                'class' => 'btn btn-danger'
+            ]) ?>
         </div>
         </div>
      </div>

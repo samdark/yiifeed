@@ -1,9 +1,8 @@
 <?php
 
-
 namespace app\components;
 
-
+use app\models\Comment;
 use app\models\News;
 use app\models\User;
 
@@ -95,4 +94,28 @@ class UserPermissions
 
         return false;
     }
+
+    /**
+     * @param Comment $comment
+     *
+     * @return bool
+     */
+    public static function canManageComment(Comment $comment)
+    {
+        if (\Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if (self::canAdminNews()) {
+            return true;
+        }
+
+        $currentUserID = (int) \Yii::$app->user->getId();
+        if ((int) $comment->user_id === $currentUserID || (int) $comment->news->user_id === $currentUserID) {
+            return true;
+        }
+
+        return false;
+    }
+    
 }

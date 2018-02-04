@@ -1,12 +1,18 @@
 <?php
+
 namespace app\controllers;
 
 use app\components\UserPermissions;
 use app\models\Comment;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * CommentController
@@ -25,11 +31,22 @@ class CommentController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'delete'],
+                        'actions' => ['index'],
                         'roles' => [UserPermissions::ADMIN_NEWS],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['@'],
+                    ]
                 ],
             ],
+            'verb' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'delete' => ['post'],
+                ]
+            ]
         ];
     }
 
@@ -51,12 +68,27 @@ class CommentController extends Controller
 
     /**
      * @param int $id
-     * @return \yii\web\Response
+     *
+     * @return Response
+     * @throws ForbiddenHttpException
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        $comment = $this->findModel($id);
+        
+        if (!UserPermissions::canManageComment($comment)) {
+            throw new ForbiddenHttpException(Yii::t('comment', 'You can not delete this comment.'));
+        }
+
+        if ($comment->delete()) {
+            Yii::$app->session->setFlash('success', Yii::t('comment', 'Comment deleted.'));
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('comment', 'Failed to delete comment.'));
+        }
+
+        $backUrl = Yii::$app->request->referrer ?: Url::to(['/news/view', 'id' => $comment->news_id]);
+
+        return $this->redirect($backUrl);
     }
 
     /**
