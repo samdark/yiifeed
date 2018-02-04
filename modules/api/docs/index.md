@@ -1,6 +1,6 @@
 # YiiFeed API v1
 
-# Authentication
+## Authentication
 The `ACCESS-TOKEN` can be obtained in your personal account.
 
 ### Access token (sent in a header)
@@ -13,23 +13,20 @@ The `ACCESS-TOKEN` can be obtained in your personal account.
 `curl -u "login:password" http://yiifeed.com/api/v1`
 
 
-# Methods
+## Endpoints
 
-Base url: `http://yiifeed.com/api/v1`.
+Base URL is `http://yiifeed.com/api/v1`.
 
+### Current user profile <a href="#current-profile" id="current-profile">#</a>
 
-## Basic
-
-### Profile current user <a href="#default-profile" id="default-profile">#</a>
-
-In order to get profile current user, use the following request:
+In order to get current user profile, use the following request:
 
 > GET [/profile](/api/v1/profile)
 
 
-## News
+### News
 
-### News object <a href="#news-object" id="news-object">#</a>
+#### News object <a href="#news-object" id="news-object">#</a>
 
 Each news contains the following fields:
 
@@ -45,19 +42,19 @@ Each news contains the following fields:
 - `user` - Creator as user object.
 - `siteUrl` - Url to news page on site.
 
-### Particular news <a href="#news-view" id="news-view">#</a>
+#### Particular news <a href="#news-view" id="news-view">#</a>
 
 In order to get particular news, use the following request:
 
 > GET [/news/1](/api/v1/news/1)
 
-### List <a href="#news-list" id="news-list">#</a>
+#### List <a href="#news-list" id="news-list">#</a>
 
 In order to list news use the following request:
 
 > GET [/news](/api/v1/news)
 
-### Filtering list <a href="#news-search" id="news-search">#</a>
+#### Filtering list <a href="#news-search" id="news-search">#</a>
 
 You may pass additional parameters when querying a list:
 
@@ -71,9 +68,9 @@ You may pass additional parameters when querying a list:
 - `userId` - ID creator of a news.
 
 
-## Users
+### Users
 
-### User object <a href="#user-object" id="user-object">#</a>
+#### User object <a href="#user-object" id="user-object">#</a>
 
 Each user contains the following fields:
 
@@ -84,13 +81,13 @@ Each user contains the following fields:
     - `10`: active.
 - `siteUrl` - Url to user page on site. 
 
-### Particular user <a href="#user-view" id="user-view">#</a>
+#### Particular user <a href="#user-view" id="user-view">#</a>
 
 In order to get particular user, use the following request:
 
 > GET [/users/1](/api/v1/users/1)
 
-### List <a href="#user-list" id="user-list">#</a>
+#### List <a href="#user-list" id="user-list">#</a>
 
 In order to list user use the following request:
 
