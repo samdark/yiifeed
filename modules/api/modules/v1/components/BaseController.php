@@ -46,7 +46,6 @@ class BaseController extends Controller
                 'status' => $response->isSuccessful ? 'ok' : 'error',
                 'data' => $response->data,
             ];
-            $response->statusCode = 200;
         });
     }
 
