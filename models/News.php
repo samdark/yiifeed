@@ -209,4 +209,19 @@ class News extends ActiveRecord
     {
         return new NewsQuery(get_called_class());
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            Comment::deleteAll(['news_id' => $this->id]);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
 }

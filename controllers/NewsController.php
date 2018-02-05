@@ -181,7 +181,7 @@ class NewsController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['admin']);
+        return $this->redirect(['admin', 'status' => 1]);
     }
 
 
