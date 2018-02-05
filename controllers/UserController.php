@@ -12,6 +12,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
+
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -28,7 +30,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['view'],
+                        'actions' => ['view', 'generate-access-token'],
                         'roles' => ['@'],
                     ],
                     [
@@ -42,6 +44,7 @@ class UserController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'generate-access-token' => ['post'],
                 ],
             ],
         ];
@@ -149,4 +152,30 @@ class UserController extends Controller
         }
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionGenerateAccessToken()
+    {
+        /** @var User $user */
+        $user = Yii::$app->user->identity;
+        if (!$user) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        
+        $user->scenario = User::SCENARIO_ACCESS_TOKEN;
+        $user->generateAccessToken();
+        
+        if ($user->save()) {
+            Yii::$app->session->setFlash('info', Yii::t('user', 'Make sure to copy your new personal access token now. You won\'t be able to see it again!'));
+            Yii::$app->session->setFlash('success', Yii::t('user', 'Access token: {accessToken}', ['accessToken' => "<b>{$user->access_token}</b>"]));
+        } else {
+            Yii::$app->session->setFlash('error', Yii::t('user', 'Failed to generate new token.'));
+        }
+        
+        return $this->redirect(['user/view', 'id' => $user->id]);
+    }
+    
 }

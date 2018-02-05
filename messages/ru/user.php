@@ -24,4 +24,8 @@ return [
     'Delete' => 'Удалён',
     'Created At' => 'Зарегистрирован',
     'Users' => 'Пользователи',
+    'Generate new access token for API' => 'Получить новый токен доступы для API',
+    'Failed to generate new token.' => 'Ошибка при генерации нового токена.',
+    'Make sure to copy your new personal access token now. You won\'t be able to see it again!' => 'Обязательно скопируйте новый токен доступа. Вы не сможете увидеть его снова!',
+    'Access token: {accessToken}' => 'Токен доступа: {accessToken}',
 ];
