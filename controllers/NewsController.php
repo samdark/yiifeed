@@ -101,7 +101,7 @@ class NewsController extends Controller
 
         $feed = new Feed();
         $feed->title = 'YiiFeed';
-        $feed->link = Url::to('');
+        $feed->link = Url::to('/', true);
         $feed->selfLink = Url::to(['news/rss'], true);
         $feed->description = 'Yii news';
         $feed->language = 'en';
