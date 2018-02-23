@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\components\queue\NewsShareJob;
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -20,6 +21,7 @@ use yii\behaviors\BlameableBehavior;
  * @property integer $created_at
  * @property integer $user_id
  * @property bool $published_to_twitter
+ * @property string $slug
  *
  * @property User $user
  * @property Comment[] $comments
@@ -57,6 +59,10 @@ class News extends ActiveRecord
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false,
             ],
+            'sluggable' => [
+                'class' => SluggableBehavior::class,
+                'attribute' => 'title',
+            ],
         ];
     }
 
@@ -88,6 +94,10 @@ class News extends ActiveRecord
             ['link', 'string', 'max' => 250],
             ['link', 'url', 'skipOnEmpty' => true],
             ['published_to_twitter', 'boolean'],
+
+            ['slug', 'required'],
+            ['slug', 'string', 'max' => 255],
+            ['slug', 'trim'],
         ];
     }
 
@@ -103,6 +113,7 @@ class News extends ActiveRecord
             'link' => Yii::t('news', 'Link'),
             'status' => Yii::t('news', 'Status'),
             'created_at' => Yii::t('news', 'Created At'),
+            'slug' => Yii::t('news', 'Slug'),
         ];
     }
 
@@ -222,6 +233,16 @@ class News extends ActiveRecord
         }
         
         return false;
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return array
+     */
+    public function getUrl($params = [])
+    {
+        return array_merge(['/news/view', 'id' => $this->id, 'slug' => $this->slug], $params);
     }
     
 }

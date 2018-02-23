@@ -43,7 +43,7 @@ class NewsShareJob extends BaseObject implements JobInterface, RetryableJobInter
             $params['twitter.accessTokenSecret']
         );
 
-        $newsUrl = Url::to(['news/view', 'id' => $news->id], true);
+        $newsUrl = Url::to($news->getUrl(), true);
 
         // The maximum message length is 140 characters. For URL you need 23 characters.
         $message = StringHelper::truncate($news->title, 108) . " {$newsUrl} #yii";

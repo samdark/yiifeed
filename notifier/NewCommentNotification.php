@@ -45,7 +45,7 @@ class NewCommentNotification implements NotificationInterface
      */
     public function getText()
     {
-        $link = Url::to(['news/view', 'id' => $this->comment->news_id, '#' => 'c' . $this->comment->id], true);
+        $link = Url::to($this->comment->news->getUrl(['#' => 'c' . $this->comment->id]), true);
         return <<<TEXT
 Hi!
 

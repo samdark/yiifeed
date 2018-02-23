@@ -60,7 +60,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
     <?php endif ?>
 </div>
 <div class="col-lg-7 col-md-9 col-sm-9 clearfix">
-    <h2><?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), ['news/view', 'id' => $model->id]) ?></h2>
+    <h2><?= $isFull ? Html::encode($model->title) : Html::a(Html::encode($model->title), $model->getUrl()) ?></h2>
     <div class="content">
     <?= HtmlPurifier::process(Markdown::process($model->text, 'gfm'), [
         'HTML.SafeIframe' => true,
