@@ -42,7 +42,7 @@ class NewSuggestionNotification implements NotificationInterface
      */
     public function getText()
     {
-        $link = Url::to(['news/view', 'id' => $this->news->id], true);
+        $link = Url::to($this->news->getUrl(), true);
 
         return <<<TEXT
 There's a new suggestion at YiiFeed:

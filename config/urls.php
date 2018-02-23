@@ -1,7 +1,13 @@
 <?php
 
 return [
+    [
+        'pattern' => 'news/<id:\d+>/<slug>',
+        'route' => 'news/view',
+        'defaults' => ['slug' => ''],
+    ],
     'news' => 'news/view',
+    
     'user' => 'user/view',
 
     'about' => 'site/about',

@@ -43,7 +43,7 @@ use yii\helpers\Markdown;
         <p>
         <a href="#c<?= $model->id ?>">#<?= $model->id ?></a>
         <span class="date"><?=Yii::$app->formatter->format($model->created_at, 'datetime')?></span>
-        → <?= Html::a(Html::encode($model->news->title), ['/news/view', 'id' => $model->news->id])?>
+        → <?= Html::a(Html::encode($model->news->title), $model->news->getUrl())?>
     </p>
     </div>
 </div>

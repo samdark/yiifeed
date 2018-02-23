@@ -86,7 +86,7 @@ class CommentController extends Controller
             Yii::$app->session->setFlash('error', Yii::t('comment', 'Failed to delete comment.'));
         }
 
-        $backUrl = Yii::$app->request->referrer ?: Url::to(['/news/view', 'id' => $comment->news_id]);
+        $backUrl = Yii::$app->request->referrer ?: Url::to($comment->news->getUrl());
 
         return $this->redirect($backUrl);
     }

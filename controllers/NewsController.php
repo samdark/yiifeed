@@ -20,6 +20,7 @@ use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * NewsController
@@ -111,8 +112,8 @@ class NewsController extends Controller
         foreach ($news as $post) {
             $item = new Item();
             $item->title = $post->title;
-            $item->link = Url::to(['news/view', 'id' => $post->id], true);
-            $item->guid = Url::to(['news/view', 'id' => $post->id], true);
+            $item->link = Url::to($post->getUrl(), true);
+            $item->guid = Url::to($post->getUrl(), true);
             $item->description = HtmlPurifier::process(Markdown::process($post->text));
 
             if (!empty($post->link)) {
@@ -149,7 +150,8 @@ class NewsController extends Controller
 
     /**
      * @param int $id
-     * @return string|\yii\web\Response
+     *
+     * @return string|Response
      * @throws ForbiddenHttpException
      */
     public function actionUpdate($id)
@@ -165,7 +167,7 @@ class NewsController extends Controller
             $model->scenario = News::SCENARIO_UPDATE;
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($model->getUrl());
         }
 
         return $this->render('update', [
@@ -175,7 +177,7 @@ class NewsController extends Controller
 
     /**
      * @param int $id
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionDelete($id)
     {
@@ -184,15 +186,20 @@ class NewsController extends Controller
         return $this->redirect(['admin', 'status' => 1]);
     }
 
-
     /**
      * @param int $id
-     * @return string|\yii\web\Response
+     * @param string $slug
+     *
+     * @return string|Response
      */
-    public function actionView($id)
+    public function actionView($id, $slug = null)
     {
         $news = $this->findModel($id);
-
+        
+        if ($slug === null || $news->slug !== (string) $slug) {
+            return $this->redirect($news->getUrl(), 301);
+        }
+        
         $commentForm = new Comment();
         $commentForm->news_id = $news->id;
         if ($commentForm->load(Yii::$app->request->post()) && $commentForm->save()) {

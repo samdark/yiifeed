@@ -20,7 +20,7 @@ class News extends \app\models\News implements Linkable
             'createdAt' => 'created_at',
             'status' => 'status',
             'siteUrl' => function (News $news) {
-                return Url::to(['/news/view', 'id' => $news->id], true);
+                return Url::to($news->getUrl(), true);
             }
         ];
     }
