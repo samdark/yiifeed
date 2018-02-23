@@ -2,7 +2,7 @@
     "name": "yiifeed/yiifeed",
     "description": "yiifeed",
     "keywords": ["rss", "news", "feed", "yii"],
-    "homepage": "http://yiifeed.com/",
+    "homepage": "https://yiifeed.com/",
     "type": "project",
     "license": "BSD-3-Clause",
     "minimum-stability": "stable",

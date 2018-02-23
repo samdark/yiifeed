@@ -4,18 +4,18 @@
 The `ACCESS-TOKEN` can be obtained in your personal account.
 
 ### Access token (sent in a header)
-`curl -H "Authorization: Bearer ACCESS-TOKEN" http://yiifeed.com/api/v1`
+`curl -H "Authorization: Bearer ACCESS-TOKEN" https://yiifeed.com/api/v1`
 
 ### Access token (sent in query)
-`curl http://yiifeed.com/api/v1?access-token=ACCESS-TOKEN`
+`curl https://yiifeed.com/api/v1?access-token=ACCESS-TOKEN`
 
 ### Basic Authentication
-`curl -u "login:password" http://yiifeed.com/api/v1`
+`curl -u "login:password" https://yiifeed.com/api/v1`
 
 
 ## Endpoints
 
-Base URL is `http://yiifeed.com/api/v1`.
+Base URL is `https://yiifeed.com/api/v1`.
 
 ### Current user profile <a href="#current-profile" id="current-profile">#</a>
 
