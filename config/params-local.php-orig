@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'siteAbsoluteUrl' => 'http://yiifeed.com',
+    'siteAbsoluteUrl' => 'https://yiifeed.com',
 
     /**
      * @see https://apps.twitter.com/app/new
