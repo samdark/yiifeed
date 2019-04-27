@@ -74,7 +74,7 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
         <?php endif ?>
 
         <a target="_blank" href="https://twitter.com/intent/tweet?status=<?= urlencode(Html::encode($model->title) . ' ' . Url::canonical() . ' #yii') ?>" class="btn btn-sm btn-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</a>
-        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(Url::canonical()) ?>', '<?= Html::encode($model->title) ?>" class="btn btn-sm btn-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(Url::canonical() . ', ' . Html::encode($model->title)) ?>" class="btn btn-sm btn-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
 
     </div>
     <?php endif ?>
