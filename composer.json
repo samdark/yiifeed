@@ -8,10 +8,10 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.9",
+        "yiisoft/yii2": "~2.0.35",
         "yiisoft/yii2-bootstrap": "~2.0.6",
         "yiisoft/yii2-swiftmailer": "~2.0.5",
-        "yiisoft/yii2-authclient": "~2.1.1",
+        "yiisoft/yii2-authclient": "~2.2.7",
         "cebe/yii2-gravatar": "~1.1",
         "baibaratsky/yii2-rollbar": "1.2.*",
         "bower-asset/codemirror": "~5.9.0",
@@ -20,8 +20,8 @@
         "abraham/twitteroauth": "~0.7.4"
     },
     "require-dev": {
-        "yiisoft/yii2-debug": "~2.0.6",
-        "yiisoft/yii2-gii": "~2.0.5"
+        "yiisoft/yii2-debug": "~2.1.13",
+        "yiisoft/yii2-gii": "~2.2.1"
     },
     "config": {
         "process-timeout": 1800,
