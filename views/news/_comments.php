@@ -59,7 +59,7 @@ $commentCount = count($comments);
     <?php endforeach ?>
 </ol>
 
-<?php if (!Yii::$app->user->isGuest): ?>
+<?php /*if (!Yii::$app->user->isGuest): ?>
 
     <hr>
 
@@ -72,7 +72,7 @@ $commentCount = count($comments);
     <?php ActiveForm::end(); ?>
 <?php else: ?>
     <p><b>Signup in order to comment.</b></p>
-<?php endif ?>
+<?php endif */ ?>
 
 </div>
 </div>

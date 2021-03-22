@@ -30,7 +30,7 @@ $this->title = $model->title;
         <?= $this->render('_view', [
             'isFull' => true,
             'model' => $model,
-            'commentForm' => $commentForm,
+            //'commentForm' => $commentForm,
             'displayModeratorButtons' => UserPermissions::canEditNews($model),
         ]) ?>
     </div>

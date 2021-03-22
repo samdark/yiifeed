@@ -200,16 +200,16 @@ class NewsController extends Controller
             return $this->redirect($news->getUrl(), 301);
         }
         
-        $commentForm = new Comment();
-        $commentForm->news_id = $news->id;
-        if ($commentForm->load(Yii::$app->request->post()) && $commentForm->save()) {
-            $this->notifyAboutComment($news, $commentForm);
-            return $this->refresh('#c' . $commentForm->id);
-        }
+//        $commentForm = new Comment();
+//        $commentForm->news_id = $news->id;
+//        if ($commentForm->load(Yii::$app->request->post()) && $commentForm->save()) {
+//            $this->notifyAboutComment($news, $commentForm);
+//            return $this->refresh('#c' . $commentForm->id);
+//        }
 
         return $this->render('view', [
             'model' => $news,
-            'commentForm' => $commentForm,
+//            'commentForm' => $commentForm,
         ]);
     }
 

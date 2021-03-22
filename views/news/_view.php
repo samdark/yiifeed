@@ -86,6 +86,6 @@ $this->registerMetaTag(['property' => 'og:url', 'content' => Url::canonical()]);
 <?php if ($isFull): ?>
     <?= $this->render('_comments', [
         'comments' => $model->comments,
-        'commentForm' => $commentForm,
+        //'commentForm' => $commentForm,
     ]) ?>
 <?php endif ?>
