@@ -17,6 +17,18 @@ $bundle = AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <?php if (YII_ENV_PROD): ?>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGPB0TEB15"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YGPB0TEB15');
+        </script>
+    <?php endif ?>
+
   <meta charset="<?= Yii::$app->charset ?>"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?= Html::csrfMetaTags() ?>
@@ -78,11 +90,11 @@ $bundle = AppAsset::register($this);
     <?php if (isset($this->blocks['header'])): ?>
         <?= $this->blocks['header'] ?>
     <?php endif; ?>
-  
+
   <div class="container">
     <?= Alert::widget() ?>
     <?= $content ?>
-  
+
 </div>
 </div>
 <footer>
@@ -95,9 +107,6 @@ $bundle = AppAsset::register($this);
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
-  
-  
-  <?php GoogleAnalytics::track('UA-96093853-1') ?>
   
   <?php $this->endBody() ?>
   </body>
